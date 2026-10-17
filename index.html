@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exam 1 · ISTQB® CTFL® v4.0</title>
+<meta name="description" content="Practice Exam 1 for the ISTQB® CTFL® v4.0 exam: 40 original questions, timed exam mode and study mode with option-by-option explanations.">
+<style>
+/* exam.css — CTFL practice exam (Exam + Study mode). Palette = exam guide site.css */
+:root {
+  --navy: #172a45; --navy2: #1f3a5f; --navy3: #2a4a70; --teal: #2ec4b6; --teal-ink: #0f7f75;
+  --ink: #1d232b; --muted: #5a6573; --line: #dde3ea; --soft: #f4f7fa; --head: #eef2f7;
+  --link: #1f5f8b; --bg: #ffffff; --card: #ffffff; --answer: #f1faf9;
+  --ok: #1d7a46; --ok-bg: #e8f5ee; --bad: #b3261e; --bad-bg: #fbeceb; --warn: #9a5b00; --warn-bg: #fff4e0;
+  --flag: #c77700; --sel: #e6f0fa; --sel-line: #1f5f8b;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --radius: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #cfe0f5; --navy2: #b9cfe8; --navy3: #a8c2df; --teal-ink: #5fd9cc; --ink: #e3e8ee; --muted: #9aa6b4;
+    --line: #2c3644; --soft: #18202a; --head: #1d2733; --link: #7fc4f0; --bg: #10161d; --card: #141c25; --answer: #12262a;
+    --ok: #6fd39a; --ok-bg: #13281d; --bad: #ff8a80; --bad-bg: #2d1615; --warn: #ffc56b; --warn-bg: #2b2112;
+    --flag: #ffb74d; --sel: #172a3d; --sel-line: #7fc4f0; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --navy: #cfe0f5; --navy2: #b9cfe8; --navy3: #a8c2df; --teal-ink: #5fd9cc; --ink: #e3e8ee; --muted: #9aa6b4;
+  --line: #2c3644; --soft: #18202a; --head: #1d2733; --link: #7fc4f0; --bg: #10161d; --card: #141c25; --answer: #12262a;
+  --ok: #6fd39a; --ok-bg: #13281d; --bad: #ff8a80; --bad-bg: #2d1615; --warn: #ffc56b; --warn-bg: #2b2112;
+  --flag: #ffb74d; --sel: #172a3d; --sel-line: #7fc4f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+a { color: var(--link); }
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* top bar (same as guide) */
+.topbar { position: sticky; top: 0; z-index: 30; background: #172a45; color: #fff; border-bottom: 3px solid var(--teal); font-family: var(--sans); }
+.topbar .inner { max-width: 60rem; margin: 0 auto; padding: 10px 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.topbar .brand { color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; line-height: 1.3; }
+.topbar .right { display: flex; gap: 14px; align-items: center; font-size: 13px; }
+.topbar .right a { color: #fff; opacity: .9; text-underline-offset: 2px; }
+.icon-btn { background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 13px; }
+.band { background: var(--warn-bg); color: var(--warn); font-family: var(--sans); font-size: 13.5px; text-align: center; padding: 6px 16px; border-bottom: 1px solid var(--line); }
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 1.5rem 16px 4rem; }
+h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.25; color: var(--navy); }
+h1 { font-size: 1.9rem; margin: .4rem 0 .4rem; }
+h2 { color: var(--navy2); font-size: 1.35rem; margin: 2.2rem 0 .8rem; }
+h3 { color: var(--navy3); font-size: 1.08rem; margin: 1.6rem 0 .5rem; }
+.sub { font-family: var(--sans); color: var(--muted); font-size: 15.5px; margin: 0 0 1.2rem; }
+.muted { color: var(--muted); }
+.small { font-size: 14.5px; }
+.sans { font-family: var(--sans); }
+
+/* buttons */
+.btn { font-family: var(--sans); font-size: 15.5px; font-weight: 600; border-radius: 8px; padding: .6rem 1.1rem; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; min-height: 44px; }
+.btn:hover { background: var(--soft); }
+.btn.primary { background: #1f3a5f; border-color: #1f3a5f; color: #fff; }
+.btn.primary:hover { background: #2a4a70; }
+.btn.teal { background: var(--teal); border-color: var(--teal); color: #0b2b28; }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--bad); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn:focus-visible, .opt:focus-within, .nav-cell:focus-visible, .chip:focus-visible, summary:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 1rem 0 1.6rem; font-family: var(--sans); }
+.fact { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .8rem; }
+.fact b { display: block; font-size: 1.35rem; color: var(--navy); line-height: 1.2; }
+.fact span { font-size: 13px; color: var(--muted); line-height: 1.35; display: block; margin-top: 2px; }
+
+/* mode cards */
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1rem 0; }
+.mode { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.1rem 1.2rem; background: var(--card); display: flex; flex-direction: column; gap: .6rem; }
+.mode.exam { border-top: 4px solid #1f3a5f; }
+.mode.study { border-top: 4px solid var(--teal); }
+.mode h3 { margin: 0; font-size: 1.15rem; }
+.mode ul { margin: 0; padding-left: 1.1rem; font-size: 15.5px; font-family: var(--sans); color: var(--ink); }
+.mode li { margin: .2rem 0; }
+.mode .btn { margin-top: auto; align-self: flex-start; }
+.settings { font-family: var(--sans); font-size: 15px; display: grid; gap: .9rem; background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; margin: 1rem 0; }
+.settings fieldset { border: 0; padding: 0; margin: 0; }
+.settings legend { font-weight: 600; margin-bottom: .35rem; color: var(--navy2); }
+.radio-row { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; }
+.radio-row label { display: inline-flex; gap: .4rem; align-items: center; cursor: pointer; }
+.hint { font-size: 13.5px; color: var(--muted); margin: .25rem 0 0; }
+.resume { font-family: var(--sans); background: var(--sel); border: 1px solid var(--sel-line); border-radius: var(--radius); padding: .9rem 1rem; display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; justify-content: space-between; margin: 1rem 0; }
+.history { font-family: var(--sans); font-size: 14.5px; }
+.history table { margin-top: .4rem; }
+
+/* details / collapsibles */
+details.box { border: 1px solid var(--line); border-radius: var(--radius); margin: .7rem 0; background: var(--card); }
+details.box > summary { cursor: pointer; padding: .75rem 1rem; font-family: var(--sans); font-weight: 600; color: var(--navy2); list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+details.box > summary::-webkit-details-marker { display: none; }
+details.box > summary::after { content: "+"; font-weight: 400; color: var(--muted); }
+details.box[open] > summary::after { content: "–"; }
+details.box > .inner { padding: 0 1rem .9rem; font-size: 16.5px; }
+details.box > .inner h1 { display: none; }
+
+/* tables */
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 15px; line-height: 1.45; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--head); }
+.table-wrap { overflow-x: auto; margin: 1rem 0; }
+
+/* ---------- runner ---------- */
+.runbar { position: sticky; top: var(--topbar-h, 49px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); font-family: var(--sans); }
+.runbar .inner { max-width: 46rem; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+.runbar .pos { font-weight: 600; color: var(--navy2); font-size: 15px; }
+.runbar .tools { display: flex; gap: 8px; align-items: center; }
+.timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 16px; padding: 4px 10px; border-radius: 6px; background: var(--soft); border: 1px solid var(--line); min-width: 5.2rem; text-align: center; }
+.timer.low { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
+.timer.crit { background: var(--bad-bg); color: var(--bad); border-color: var(--bad); }
+.tally { font-size: 14.5px; color: var(--muted); }
+.tally b.ok { color: var(--ok); } .tally b.bad { color: var(--bad); }
+.progress { height: 4px; background: var(--line); }
+.progress > div { height: 100%; background: var(--teal); width: 0; transition: width .2s; }
+.tool-btn { font-family: var(--sans); font-size: 14px; font-weight: 600; border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 6px 10px; cursor: pointer; min-height: 36px; }
+.tool-btn[aria-pressed="true"] { background: var(--warn-bg); border-color: var(--flag); color: var(--flag); }
+
+.qmeta { font-family: var(--sans); font-size: 13.5px; color: var(--muted); margin: 1.2rem 0 .3rem; display: flex; gap: .4rem .8rem; flex-wrap: wrap; }
+.qmeta .tag { background: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+.qtitle { font-family: var(--sans); font-size: 1.05rem; color: var(--navy2); margin: .2rem 0 .6rem; font-weight: 700; }
+.stem { font-size: 18.5px; }
+.stem p { margin: .5rem 0; }
+.stem table { margin: .8rem 0; }
+.stem img, .rationale img { max-width: 100%; height: auto; background: #fff; border-radius: 4px; padding: 4px; }
+.select-note { font-family: var(--sans); font-size: 14px; color: var(--muted); font-style: italic; margin: .6rem 0 .4rem; }
+fieldset.opts { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
+.opt { position: relative; display: flex; gap: .8rem; align-items: flex-start; border: 1.5px solid var(--line); border-radius: var(--radius); padding: .75rem .9rem; cursor: pointer; background: var(--card); font-size: 17.5px; line-height: 1.45; transition: border-color .12s, background .12s; }
+.opt:hover { border-color: var(--sel-line); }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt .letter { flex: none; width: 2rem; height: 2rem; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; font-family: var(--sans); font-weight: 700; font-size: 15px; color: var(--muted); background: var(--soft); }
+.opt.multi .letter { border-radius: 6px; }
+.opt .txt { padding-top: .15rem; }
+.opt.selected { border-color: var(--sel-line); background: var(--sel); }
+.opt.selected .letter { background: #1f3a5f; border-color: #1f3a5f; color: #fff; }
+.opt.correct { border-color: var(--ok); background: var(--ok-bg); }
+.opt.correct .letter { background: var(--ok); border-color: var(--ok); color: #fff; }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt.wrong .letter { background: var(--bad); border-color: var(--bad); color: #fff; }
+.opt.locked { cursor: default; }
+.opt .mark { margin-left: auto; font-family: var(--sans); font-size: 13px; font-weight: 700; padding-top: .3rem; white-space: nowrap; }
+.opt.correct .mark { color: var(--ok); } .opt.wrong .mark { color: var(--bad); }
+
+.navrow { display: flex; justify-content: space-between; gap: 10px; margin: 1.4rem 0 .5rem; flex-wrap: wrap; }
+.navrow .grow { flex: 1; }
+.kbd-hint { font-family: var(--sans); font-size: 12.5px; color: var(--muted); text-align: center; margin-top: .6rem; }
+kbd { font-family: var(--sans); font-size: 11.5px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--soft); }
+
+.feedback { border-radius: var(--radius); margin: 1.2rem 0 .6rem; font-family: var(--sans); padding: .75rem 1rem; font-weight: 700; display: flex; gap: .6rem; align-items: center; }
+.feedback.ok { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok); }
+.feedback.bad { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad); }
+.rationale { background: var(--answer); border-left: 4px solid var(--teal); border-radius: 0 var(--radius) var(--radius) 0; padding: .4rem 1.1rem .8rem; font-size: 16.5px; }
+.rationale p { margin: .55rem 0; }
+.guide-link { font-family: var(--sans); font-size: 15px; margin: .8rem 0 0; padding-top: .6rem; border-top: 1px dashed var(--line); }
+.guide-link a { font-weight: 600; }
+
+/* navigator drawer */
+.drawer-back { position: fixed; inset: 0; background: rgba(10,20,30,.45); z-index: 40; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(360px, 92vw); background: var(--bg); z-index: 41; box-shadow: -8px 0 30px rgba(0,0,0,.2); display: flex; flex-direction: column; font-family: var(--sans); }
+.drawer header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.drawer header h2 { margin: 0; font-size: 1.1rem; }
+.drawer .body { padding: 14px 16px; overflow-y: auto; flex: 1; }
+.navgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.nav-cell { position: relative; aspect-ratio: 1.15; border: 1.5px solid var(--line); background: var(--card); border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; color: var(--ink); }
+.nav-cell.answered { background: var(--sel); border-color: var(--sel-line); }
+.nav-cell.correct { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+.nav-cell.wrong { background: var(--bad-bg); border-color: var(--bad); color: var(--bad); }
+.nav-cell.current { outline: 3px solid var(--teal); outline-offset: 1px; }
+.nav-cell.flagged::after { content: ""; position: absolute; top: 4px; right: 4px; width: 0; height: 0; border-left: 8px solid transparent; border-top: 8px solid var(--flag); }
+.legend { display: flex; flex-wrap: wrap; gap: .4rem 1rem; font-size: 13px; color: var(--muted); margin: 1rem 0; }
+.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--line); vertical-align: -2px; margin-right: 4px; }
+.legend i.a { background: var(--sel); border-color: var(--sel-line); } .legend i.f { border-top: 6px solid var(--flag); }
+.legend i.c { background: var(--ok-bg); border-color: var(--ok); } .legend i.w { background: var(--bad-bg); border-color: var(--bad); }
+.counts { font-size: 14.5px; margin: .5rem 0 1rem; }
+.drawer footer { padding: 14px 16px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+
+/* modal */
+.modal-back { position: fixed; inset: 0; background: rgba(10,20,30,.5); z-index: 50; display: grid; place-items: center; padding: 16px; }
+.modal { background: var(--bg); border-radius: 12px; max-width: 28rem; width: 100%; padding: 1.3rem 1.3rem 1.1rem; font-family: var(--sans); box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+.modal h2 { margin: 0 0 .6rem; font-size: 1.2rem; }
+.modal p { font-size: 15.5px; margin: .4rem 0; }
+.modal .actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.1rem; flex-wrap: wrap; }
+
+/* ---------- results ---------- */
+.hero { border-radius: 14px; padding: 1.3rem 1.3rem 1.2rem; font-family: var(--sans); display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: center; border: 1px solid var(--line); background: var(--soft); margin: 1rem 0 1.2rem; }
+.hero.pass { border-color: var(--ok); background: var(--ok-bg); }
+.hero.fail { border-color: var(--bad); background: var(--bad-bg); }
+.ring { --p: 0; width: 118px; height: 118px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--ring) calc(var(--p) * 1%), var(--line) 0); }
+.hero.pass .ring { --ring: var(--ok); } .hero.fail .ring { --ring: var(--bad); } .hero.study .ring { --ring: var(--teal); }
+.ring > div { width: 92px; height: 92px; border-radius: 50%; background: var(--bg); display: grid; place-items: center; text-align: center; line-height: 1.1; }
+.ring b { font-size: 1.7rem; color: var(--navy); } .ring span { font-size: 12.5px; color: var(--muted); }
+.verdict { font-size: 1.3rem; font-weight: 800; margin: 0 0 .25rem; }
+.hero.pass .verdict { color: var(--ok); } .hero.fail .verdict { color: var(--bad); } .hero.study .verdict { color: var(--teal-ink); }
+.hero p { margin: .2rem 0; font-size: 15px; }
+.bandtext { font-size: 16.5px; }
+.caution { font-family: var(--sans); font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: .8rem; }
+.bars td.bar { width: 42%; }
+.bar-track { height: 10px; border-radius: 99px; background: var(--line); overflow: hidden; margin-top: 6px; }
+.bar-fill { height: 100%; background: var(--teal); }
+.bar-fill.low { background: var(--bad); }
+.prio { font-size: 12px; font-weight: 700; color: var(--bad); white-space: nowrap; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: .8rem 0 1rem; font-family: var(--sans); }
+.chip { border: 1.5px solid var(--line); background: var(--card); border-radius: 999px; padding: 5px 13px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 36px; }
+.chip[aria-pressed="true"] { background: #1f3a5f; border-color: #1f3a5f; color: #fff; }
+.rev-item { border: 1px solid var(--line); border-radius: var(--radius); margin: .6rem 0; background: var(--card); }
+.rev-item > summary { list-style: none; cursor: pointer; padding: .7rem .9rem; font-family: var(--sans); display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: center; }
+.rev-item > summary::-webkit-details-marker { display: none; }
+.rev-item .badge { width: 2.1rem; height: 2.1rem; border-radius: 8px; display: grid; place-items: center; font-weight: 800; font-size: 14px; }
+.rev-item.ok .badge { background: var(--ok-bg); color: var(--ok); border: 1.5px solid var(--ok); }
+.rev-item.bad .badge { background: var(--bad-bg); color: var(--bad); border: 1.5px solid var(--bad); }
+.rev-item.skip .badge { background: var(--soft); color: var(--muted); border: 1.5px dashed var(--muted); }
+.rev-item .sumtxt { font-size: 14.5px; line-height: 1.35; min-width: 0; }
+.rev-item .sumtxt .lo { color: var(--muted); font-size: 13px; }
+.rev-item .ans { font-size: 13.5px; text-align: right; white-space: nowrap; color: var(--muted); }
+.rev-item .ans b { color: var(--ink); }
+.rev-item .content { padding: 0 1rem 1rem; }
+.actions-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.2rem 0; }
+
+footer.site { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1rem; font-family: var(--sans); font-size: 13.5px; color: var(--muted); }
+footer.site p { margin: .4rem 0; }
+
+#print-area { display: none; }
+
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .modes, .split { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; justify-items: start; }
+  .stem { font-size: 17.5px; } .opt { font-size: 16.5px; }
+  .topbar .right .hide-sm, .topbar .brand .hide-sm { display: none; }
+  .rev-item > summary { grid-template-columns: auto 1fr; }
+  .rev-item .ans { grid-column: 2; text-align: left; }
+  .kbd-hint { display: none; }
+}
+
+@media print {
+  .topbar, .band, .runbar, .progress, #app, .drawer, .drawer-back, .modal-back, footer.site { display: none !important; }
+  body { font-size: 11.5pt; background: #fff; color: #000; }
+  #print-area { display: block !important; max-width: none; padding: 0; }
+  #print-area h1 { font-size: 18pt; color: #000; }
+  #print-area h2 { font-size: 14pt; color: #000; break-after: avoid; }
+  .pq { break-inside: avoid; margin: 0 0 14pt; }
+  .pq .stem { font-size: 11.5pt; }
+  .pq ol { list-style: none; padding-left: 0; margin: 4pt 0; }
+  .pq li { margin: 2pt 0; }
+  .prat { break-inside: auto; margin: 0 0 12pt; padding-left: 8pt; border-left: 2pt solid #999; }
+  table { font-size: 10pt; }
+  a { color: #000; text-decoration: none; }
+}
+
+.qtitle:focus { outline: none; }
+
+/* 2026-10-17: uzun kod/ASCII blokları dar ekranda sayfayı taşırmasın */
+pre{overflow-x:auto;max-width:100%}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="inner">
+    <a class="brand" href="#" data-act="home"><span class="hide-sm">ISTQB® </span>CTFL v4.0 · Practice Exam 1</a>
+    <div class="right">
+      <a class="hide-sm" href="https://kadir-camoglu.github.io/istqb-ctfl-v4-exam-guide/">Exam guide</a>
+      <button class="icon-btn" type="button" id="theme-btn" aria-label="Switch colour theme">Theme</button>
+    </div>
+  </div>
+</header>
+<div class="band" role="note">Public draft · 2026-10 — under review. Feedback: <a href="mailto:kadir.camoglu@gmail.com">kadir.camoglu@gmail.com</a></div>
+
+<div id="app">
+  <!-- START -->
+  <main class="wrap" id="view-start">
+    <h1>ISTQB® CTFL® Practice Exam 1</h1>
+    <p class="sub">40 questions with detailed answers · aligned with the ISTQB® CTFL syllabus v4.0.1 and Exam Structure Tables v1.18</p>
+
+    <div class="facts" role="list">
+      <div class="fact" role="listitem"><b>40</b><span>questions, one point each</span></div>
+      <div class="fact" role="listitem"><b>60 min</b><span>75 min with extended time</span></div>
+      <div class="fact" role="listitem"><b>26 / 40</b><span>to pass (65%)</span></div>
+      <div class="fact" role="listitem"><b>8 · 24 · 8</b><span>K1 · K2 · K3 questions</span></div>
+    </div>
+
+    <div class="resume" id="resume-box" hidden>
+      <div><strong id="resume-title">You have an attempt in progress.</strong><br><span class="small muted" id="resume-detail"></span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" type="button" data-act="resume">Resume</button>
+        <button class="btn ghost danger" type="button" data-act="discard">Discard</button>
+      </div>
+    </div>
+
+    <h2>Choose how to work</h2>
+    <div class="modes">
+      <section class="mode exam" aria-labelledby="m-exam">
+        <h3 id="m-exam">Exam mode</h3>
+        <ul>
+          <li>Timed, like the real exam.</li>
+          <li>No feedback until you submit.</li>
+          <li>Flag questions and come back to them.</li>
+          <li>Score, chapter scorecard and full review at the end.</li>
+        </ul>
+        <button class="btn primary" type="button" data-act="start-exam">Start exam</button>
+      </section>
+      <section class="mode study" aria-labelledby="m-study">
+        <h3 id="m-study">Study mode</h3>
+        <ul>
+          <li>No timer.</li>
+          <li>Check each answer as you go.</li>
+          <li>The full explanation appears straight away, option by option.</li>
+          <li>A link takes you to the matching section of the exam guide.</li>
+        </ul>
+        <button class="btn teal" type="button" data-act="start-study">Start studying</button>
+      </section>
+    </div>
+
+    <div class="settings">
+      <fieldset>
+        <legend>Time limit (exam mode)</legend>
+        <div class="radio-row">
+          <label><input type="radio" name="time" value="60" checked> 60 minutes</label>
+          <label><input type="radio" name="time" value="75"> 75 minutes</label>
+          <label><input type="radio" name="time" value="0"> No timer</label>
+        </div>
+        <p class="hint">Choose 75 minutes only if your exam provider grants you the extended time (+25% when the exam is not in your native language).</p>
+      </fieldset>
+      <fieldset>
+        <legend>Question order</legend>
+        <div class="radio-row">
+          <label><input type="radio" name="order" value="mixed" checked> Mixed, like the real exam</label>
+          <label><input type="radio" name="order" value="chapter"> Grouped by syllabus chapter</label>
+        </div>
+        <p class="hint">The real exam mixes its questions and does not tell you which chapter a question comes from.</p>
+      </fieldset>
+    </div>
+
+    <div class="history" id="history-box" hidden>
+      <h2>Your previous attempts</h2>
+      <p class="small muted">Saved in this browser only.</p>
+      <div class="table-wrap"><table><thead><tr><th>Date</th><th>Mode</th><th>Score</th><th>Time used</th></tr></thead><tbody id="history-body"></tbody></table></div>
+      <button class="btn ghost small" type="button" data-act="clear-history">Clear history</button>
+    </div>
+
+    <h2>Before you start</h2>
+    <details class="box"><summary>About this practice exam</summary><div class="inner">
+<p>This is one of five full-length practice exams for the ISTQB® Certified Tester Foundation Level (CTFL®) v4.0 exam. Each exam has 40 original questions. The chapter distribution (8-6-4-11-9-2) and the cognitive levels (K1 8, K2 24, K3 8) follow the ISTQB® Exam Structure Tables v1.18.</p>
+<p>Every question comes with an option-by-option explanation and a link to the matching section of the free <a href="https://kadir-camoglu.github.io/istqb-ctfl-v4-exam-guide/">ISTQB® CTFL v4.0 Exam Guide</a>.</p>
+<p><strong>Before you book.</strong> Exam conditions can change. Check the current rules on the <a href="https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/">official ISTQB® CTFL page</a>, and with your national Member Board or exam provider, before you sit the exam.</p>
+<p><strong>Your data.</strong> Your answers and scores are saved only in this browser, on this device. Nothing is sent anywhere.</p>
+<p class="small muted">ISTQB® and CTFL® are registered trademarks of the International Software Testing Qualifications Board (ISTQB®). This practice exam is an independent study resource. It is not affiliated with, endorsed by, or sponsored by ISTQB®. The questions are original works; they do not reproduce official ISTQB® examination content. Learning objective identifiers and syllabus section names are quoted from the ISTQB® CTFL Syllabus v4.0.1 and remain the property of ISTQB®.</p>
+</div></details>
+    <details class="box"><summary>The four trap types</summary><div class="inner">
+<p>Every question carries a trap label: the name of the mistake the question is designed to catch. The label appears only in the explanation, after you answer, so that a timed attempt stays a fair measurement.</p>
+<p><strong>Source gap.</strong> The question tests whether you know a specific list, definition, or fact from the syllabus. If you miss it, the cure is to go back and learn that piece of the source.</p>
+<p><strong>Near-miss confusion.</strong> The question places two neighbouring concepts side by side, for example confirmation testing and regression testing, or error, defect, and failure. The wrong option is not absurd; it is the concept next door.</p>
+<p><strong>Procedure error.</strong> The question gives you data and asks you to apply a technique. Each wrong option is the result of a specific mistake in the procedure, and the explanation names the step that went wrong.</p>
+<p><strong>Careless reading.</strong> The question contains a direction word such as NOT, MOST, or FIRST, or a detail in the scenario that changes the answer.</p>
+<p>The companion exam guide uses a second set of labels with a different job. Its labels (sibling concept, right idea in the wrong place, overstated or reversed claim, calculation slip) describe a single wrong option, while the four trap types above describe the question as a whole. The two fit together: a near-miss question, for example, is built around a sibling-concept distractor.</p>
+</div></details>
+    <div id="resources"></div>
+    <details class="box"><summary>Print a paper copy</summary><div class="inner">
+      <p>You can print the questions without answers for a paper attempt, or print the full answer key with every explanation.</p>
+      <div class="actions-row">
+        <button class="btn" type="button" data-act="print-blank">Print questions</button>
+        <button class="btn" type="button" data-act="print-key">Print answers and explanations</button>
+      </div>
+    </div></details>
+  </main>
+
+  <!-- RUNNER -->
+  <div id="view-run" hidden>
+    <div class="runbar">
+      <div class="inner">
+        <span class="pos" id="run-pos" aria-live="polite"></span>
+        <div class="tools">
+          <span class="tally" id="run-tally" hidden></span>
+          <span class="timer" id="run-timer" role="timer" hidden></span>
+          <button class="tool-btn" type="button" id="flag-btn" aria-pressed="false" title="Flag for review (F)">⚑ Flag</button>
+          <button class="tool-btn" type="button" data-act="open-nav" aria-haspopup="dialog">☰ Questions</button>
+        </div>
+      </div>
+      <div class="progress" aria-hidden="true"><div id="run-progress"></div></div>
+    </div>
+    <main class="wrap" id="run-main">
+      <div class="qmeta" id="q-meta"></div>
+      <div class="qtitle" id="q-title"></div>
+      <div class="stem" id="q-stem"></div>
+      <p class="select-note" id="q-select"></p>
+      <fieldset class="opts" id="q-opts"><legend class="sr-only" id="q-legend">Options</legend></fieldset>
+      <div id="q-feedback"></div>
+      <div class="navrow">
+        <button class="btn" type="button" data-act="prev" id="prev-btn">← Previous</button>
+        <span class="grow"></span>
+        <button class="btn teal" type="button" data-act="check" id="check-btn" hidden>Check answer</button>
+        <button class="btn primary" type="button" data-act="next" id="next-btn">Next →</button>
+      </div>
+      <p class="kbd-hint"><kbd>A</kbd>–<kbd>D</kbd> choose · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>F</kbd> flag<span id="kbd-check"> · <kbd>Enter</kbd> check</span></p>
+    </main>
+  </div>
+
+  <!-- RESULTS -->
+  <main class="wrap" id="view-results" hidden>
+    <h1 id="res-title">Your result</h1>
+    <div class="hero" id="res-hero">
+      <div class="ring" id="res-ring"><div><b id="res-score"></b><span>of 40</span></div></div>
+      <div>
+        <p class="verdict" id="res-verdict"></p>
+        <p id="res-line"></p>
+        <p class="muted" id="res-time"></p>
+      </div>
+    </div>
+    <p class="bandtext" id="res-band"></p>
+    <p class="caution" id="res-caution"></p>
+
+    <h2>Chapter scorecard</h2>
+    <div class="table-wrap"><table class="bars"><thead><tr><th>Chapter</th><th>Score</th><th class="bar">Share</th></tr></thead><tbody id="res-chapters"></tbody></table></div>
+    <p class="small muted" id="res-scorenote"></p>
+
+    <div class="split">
+      <div><h3>By cognitive level</h3><div class="table-wrap"><table><thead><tr><th>Level</th><th>Score</th></tr></thead><tbody id="res-k"></tbody></table></div></div>
+      <div><h3>Missed questions by trap type</h3><div class="table-wrap"><table><thead><tr><th>Trap</th><th>Missed</th></tr></thead><tbody id="res-trap"></tbody></table></div></div>
+    </div>
+    <p class="small muted" id="res-trapnote">Three or more misses with the same trap type point to a study priority that is not always a chapter. The trap types are explained on the start page.</p>
+
+    <h2>Review every question</h2>
+    <div class="chips" role="group" aria-label="Filter questions">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="bad" aria-pressed="false">Incorrect</button>
+      <button class="chip" type="button" data-filter="skip" aria-pressed="false">Unanswered</button>
+      <button class="chip" type="button" data-filter="flag" aria-pressed="false">Flagged</button>
+      <button class="chip" type="button" data-filter="ok" aria-pressed="false">Correct</button>
+    </div>
+    <div id="res-list"></div>
+    <p class="small muted" id="res-empty" hidden>No questions match this filter.</p>
+
+    <div class="actions-row">
+      <button class="btn primary" type="button" data-act="home">Back to start</button>
+      <button class="btn" type="button" data-act="csv">Download mistake log (CSV)</button>
+      <button class="btn" type="button" data-act="print-results">Print this review</button>
+    </div>
+  </main>
+
+  <div class="wrap" style="padding-top:0"><footer class="site">
+<p>© 2026 Kadir Çamoğlu · Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. Quoted ISTQB® material is excluded from the licence.</p>
+<p>Companion to the free <a href="https://kadir-camoglu.github.io/istqb-ctfl-v4-exam-guide/">ISTQB® CTFL v4.0 Exam Guide</a>. Feedback: <a href="mailto:kadir.camoglu@gmail.com">kadir.camoglu@gmail.com</a></p>
+</footer></div>
+</div>
+
+<!-- navigator drawer -->
+<div class="drawer-back" id="nav-back" hidden></div>
+<aside class="drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-labelledby="nav-h" hidden>
+  <header><h2 id="nav-h">Questions</h2><button class="btn ghost" type="button" data-act="close-nav" aria-label="Close">✕</button></header>
+  <div class="body">
+    <p class="counts" id="nav-counts"></p>
+    <div class="navgrid" id="nav-grid"></div>
+    <div class="legend" id="nav-legend"></div>
+  </div>
+  <footer>
+    <button class="btn primary" type="button" data-act="submit" id="nav-submit">Submit exam</button>
+    <button class="btn ghost" type="button" data-act="quit">Leave and keep progress</button>
+  </footer>
+</aside>
+
+<!-- modal -->
+<div class="modal-back" id="modal" hidden>
+  <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="modal-h" aria-describedby="modal-b">
+    <h2 id="modal-h"></h2>
+    <div id="modal-b"></div>
+    <div class="actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<div id="print-area"></div>
+
+<script id="exam-data" type="application/json">{"source":"mp1_book.md","title":"ISTQB CTFL Practice Exam 1: 40 Questions with Detailed Answers","subtitle":"Aligned with the ISTQB® Certified Tester Foundation Level Syllabus v4.0.1 — Including Near-Miss Analysis for All 40 Questions","chapters":{"1":"Fundamentals of Testing","2":"Testing Throughout the SDLC","3":"Static Testing","4":"Test Analysis and Design","5":"Managing the Test Activities","6":"Test Tools"},"questions":[{"n":1,"chapter":1,"stem":"<p>A test manager is drafting the list of objectives for testing a new release of a booking system. Which of the following belongs on that list as a typical test objective?<\/p>","options":[{"id":"a","html":"Guaranteeing that the release will not fail in operation"},{"id":"b","html":"Ensuring the required coverage of the test object"},{"id":"c","html":"Choosing the lifecycle model that the project will follow"},{"id":"d","html":"Writing the code changes that remove reported defects"}],"select":1,"key":["b"],"trap":"source-gap","lo":"FL-1.1.1","k":"K1","rationale":"<p><strong>Why b is correct.<\/strong> Ensuring the required coverage of a test object is one of the typical test objectives that the syllabus lists. The same list includes evaluating work products, causing failures and finding defects, reducing the risk level of inadequate software quality, verifying requirements, and building confidence in the quality of the test object.<\/p><p><strong>a) Guaranteeing that the release will not fail in operation — the strongest distractor.<\/strong> This option is tempting because reducing the risk of failures in operation is a real test objective. However, testing can reduce that risk; it cannot guarantee that no failure will occur. The first testing principle states that testing shows the presence of defects, not their absence.<\/p><p><strong>c) Choosing the lifecycle model that the project will follow — incorrect.<\/strong> This is a project management decision. Test objectives can vary with the lifecycle that a project follows, but choosing the lifecycle is not one of them.<\/p><p><strong>d) Writing the code changes that remove reported defects — incorrect.<\/strong> Removing defects is part of debugging, which is a development activity. Testing can cause failures and find defects, but it does not fix them.<\/p><p><strong>The key learning point:<\/strong> test objectives describe what testing can achieve, such as coverage, information and reduced risk. An option that promises certainty, or that describes development or management work, is not on the list.<\/p>","reference":"Syllabus area 1.1.1, <em>What is Testing?<\/em>","guide":{"href":"chapter-1.html#fl-1-1-1","title":"Typical test objectives"}},{"n":2,"chapter":1,"stem":"<p>A developer misunderstands a requirement and writes an incorrect condition in the parking-fee module. Months later, a driver who parks for less than one hour is charged a fee, although the first hour is advertised as free. Which statement correctly classifies what happened?<\/p>","options":[{"id":"a","html":"The incorrect condition is a failure that was caused by the driver's action"},{"id":"b","html":"The developer's misunderstanding is a defect, and the incorrect condition is the root cause"},{"id":"c","html":"The developer's misunderstanding is an error, and the overcharging event is a failure"},{"id":"d","html":"The overcharging event is a defect that was triggered by the incorrect condition"}],"select":1,"key":["c"],"trap":"near-miss","lo":"FL-1.2.3","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> The chain runs in one direction. The human mistake, the misunderstanding, is the error. The error produced a defect, which is the incorrect condition in the code. When the defective code ran, the driver was charged, and that event is the failure.<\/p><p><strong>a) The incorrect condition is a failure that was caused by the driver's action — incorrect.<\/strong> This option confuses a defect with a failure, and it adds a cause that the scenario does not contain. The driver triggered the failure by using the system, but did not cause the underlying problem.<\/p><p><strong>b) The developer's misunderstanding is a defect, and the incorrect condition is the root cause — the strongest distractor.<\/strong> This option is tempting because it senses the causal chain. However, it mislabels both links. The misunderstanding is an error, not a defect. The root cause is the fundamental reason for the problem, for example a situation that led to the error, and the code condition is the defect itself.<\/p><p><strong>d) The overcharging event is a defect that was triggered by the incorrect condition — incorrect.<\/strong> The overcharging is something that happened at runtime, so it is a failure. A defect is in a work product; a failure happens when the system runs.<\/p><p><strong>The key learning point:<\/strong> assign the three labels by location. Errors are made by people, defects are in work products, and failures happen at runtime.<\/p>","reference":"Syllabus area 1.2.3, <em>Why is Testing Necessary?<\/em>","guide":{"href":"chapter-1.html#fl-1-2-3","title":"Errors, defects, failures, and root causes"}},{"n":3,"chapter":1,"stem":"<p>The automated regression suite of a mobile banking app has run unchanged in every sprint for a year, and in recent months it has found almost no new defects. The test manager wants to act on the testing principle \"tests wear out\". Which action BEST applies this principle?<\/p>","options":[{"id":"a","html":"Run the same regression suite more often, so that it has more chances to find defects"},{"id":"b","html":"Move most of the test effort to the modules where the most defects were found before"},{"id":"c","html":"Stop running the regression suite for modules whose tests have passed for a year"},{"id":"d","html":"Modify the existing tests and test data, and write new tests where they are needed"}],"select":1,"key":["d"],"trap":"near-miss","lo":"FL-1.3.1","k":"K2","rationale":"<p><strong>Why d is correct.<\/strong> The principle says that tests repeated many times become less and less effective at detecting new defects. The remedy that the syllabus describes is to modify the existing tests and test data and to write new tests. Option d does exactly that.<\/p><p><strong>a) Run the same regression suite more often, so that it has more chances to find defects — incorrect.<\/strong> Repeating the same tests is the cause of the problem, not its cure. More runs of an unchanged suite do not help it find new kinds of defects.<\/p><p><strong>b) Move most of the test effort to the modules where the most defects were found before — the strongest distractor.<\/strong> This option can seem right at first, because concentrating test effort where defects were found before is a sound practice. However, it applies a different principle, defects cluster together. It changes where the testing goes, while the worn-out tests stay as they are.<\/p><p><strong>c) Stop running the regression suite for modules whose tests have passed for a year — incorrect.<\/strong> Stopping the regression runs removes the protection against adverse effects of later changes. The principle asks for better tests, not for fewer test runs.<\/p><p><strong>The key learning point:<\/strong> \"tests wear out\" is about the tests themselves. The cure is to change the tests and the test data, not how often or where the same tests run.<\/p>","reference":"Syllabus area 1.3, <em>Testing Principles<\/em>","guide":{"href":"chapter-1.html#fl-1-3-1","title":"The Seven Testing Principles"}},{"n":4,"chapter":1,"stem":"<p>Before any test cases exist for a new insurance-claim feature, a tester checks whether each acceptance criterion in the user stories is precise enough to be tested, lists the features that will need testing, and notes the risk level of each one. Which test activity is the tester performing?<\/p>","options":[{"id":"a","html":"Test planning"},{"id":"b","html":"Test design"},{"id":"c","html":"Test monitoring and test control"},{"id":"d","html":"Test analysis"}],"select":1,"key":["d"],"trap":"source-gap","lo":"FL-1.4.1","k":"K2","rationale":"<p><strong>Why d is correct.<\/strong> Test analysis examines the test basis to identify testable features and to define and prioritize test conditions, taking the related risks into account. During analysis, the test basis is also evaluated for defects and for its testability. Checking whether the acceptance criteria can be tested, listing the features to be tested and noting their risk levels are all part of this activity.<\/p><p><strong>a) Test planning — the strongest distractor.<\/strong> At first glance, this may look correct because planning also deals with risks and with the scope of testing. However, test planning defines the test objectives and the approach for meeting them within the constraints of the context. It does not go through the acceptance criteria one by one to judge their testability.<\/p><p><strong>b) Test design — incorrect.<\/strong> Test design turns test conditions into test cases. The scenario takes place before any test cases exist, and it works on the test basis itself.<\/p><p><strong>c) Test monitoring and test control — incorrect.<\/strong> Test monitoring and test control compare progress with the plan and take corrective action. Nothing in the scenario concerns progress.<\/p><p><strong>The key learning point:<\/strong> test analysis answers the question \"what to test?\". It identifies testable features, evaluates the testability of the test basis and takes the risk levels into account.<\/p>","reference":"Syllabus area 1.4.1, <em>Test Activities, Testware and Test Roles<\/em>","guide":{"href":"chapter-1.html#fl-1-4-1","title":"Test activities"}},{"n":5,"chapter":1,"stem":"<p>While preparing the testing of a new release, a test team produces the work products listed below. Which TWO of them are work products of test implementation?<\/p>","options":[{"id":"a","html":"Prioritized test conditions derived from the acceptance criteria"},{"id":"b","html":"A test execution schedule that sets the order of the first test runs"},{"id":"c","html":"Test cases with their coverage items and test data requirements"},{"id":"d","html":"Test logs that record which tests were run and with what outcome"},{"id":"e","html":"Test suites that group the automated test scripts for the nightly run"}],"select":2,"key":["b","e"],"trap":"near-miss","lo":"FL-1.4.3","k":"K2","rationale":"<p><strong>Why b and e are correct.<\/strong> Test implementation creates or acquires the testware that test execution needs. Among its work products, the syllabus lists test procedures, test suites, manual and automated test scripts, test data, the test execution schedule and test environment items. Option b is a test execution schedule, and option e is a set of test suites built from automated scripts. In this book, a Select TWO question earns its point only when both correct options are chosen.<\/p><p><strong>a) Prioritized test conditions derived from the acceptance criteria — incorrect.<\/strong> Prioritized test conditions are a work product of test analysis.<\/p><p><strong>c) Test cases with their coverage items and test data requirements — the strongest distractor.<\/strong> This option is tempting because test cases and test data feel like the material that is made ready just before execution. However, test cases, coverage items and test data requirements are work products of test design. Test implementation then turns the test data requirements into actual test data.<\/p><p><strong>d) Test logs that record which tests were run and with what outcome — incorrect.<\/strong> Test logs are produced while the tests run, so they are a work product of test execution.<\/p><p><strong>The key learning point:<\/strong> learn each activity with its characteristic outputs: analysis gives test conditions, design gives test cases and requirements for data and environment, implementation gives procedures, scripts, suites, data, the execution schedule and the environment, and execution gives logs.<\/p>","reference":"Syllabus area 1.4.3, <em>Test Activities, Testware and Test Roles<\/em>","guide":{"href":"chapter-1.html#fl-1-4-3","title":"Testware"}},{"n":6,"chapter":1,"stem":"<p>Before a release decision, a test manager links each identified product risk to the tests that address it and to their latest results. At the go/no-go meeting she shows, risk by risk, which risks have passing tests and which still have failed or unexecuted tests. Which benefit of traceability does this illustrate?<\/p>","options":[{"id":"a","html":"Verifying that every requirement is covered by at least one test case"},{"id":"b","html":"Evaluating the level of residual risk in the test object"},{"id":"c","html":"Analyzing the impact of a change on the existing test cases"},{"id":"d","html":"Preventing new defects from being introduced into the test object"}],"select":1,"key":["b"],"trap":"source-gap","lo":"FL-1.4.4","k":"K2","rationale":"<p><strong>Why b is correct.<\/strong> Traceability between test results and risks lets the team judge how much residual risk remains in the test object. Every identified risk is linked to its tests and to their latest results, so the test manager can show which risks are backed by passing tests and which remain open.<\/p><p><strong>a) Verifying that every requirement is covered by at least one test case — the strongest distractor.<\/strong> This option is tempting because coverage of the requirements is the best-known benefit of traceability. However, it relies on links from test cases to requirements. The scenario links test results to risks, and the question at the meeting is how much risk remains, not whether each requirement has a test.<\/p><p><strong>c) Analyzing the impact of a change on the existing test cases — incorrect.<\/strong> Impact analysis uses traceability to find the tests affected by a change. The scenario describes no change.<\/p><p><strong>d) Preventing new defects from being introduced into the test object — incorrect.<\/strong> Traceability does not prevent defects. It shows what was tested and with which result. Preventing defects is the goal of quality assurance and of early reviews.<\/p><p><strong>The key learning point:<\/strong> match the benefit to the links in the scenario. Links from test cases to requirements show coverage, links from test results to risks show residual risk, and links to a changed item support impact analysis.<\/p>","reference":"Syllabus area 1.4.4, <em>Test Activities, Testware and Test Roles<\/em>.","guide":{"href":"chapter-1.html#fl-1-4-4","title":"The value of traceability"}},{"n":7,"chapter":1,"stem":"<p>As part of the whole team approach, a company moves its testers, developers and business representatives into one shared workspace. Which advantage does this change support?<\/p>","options":[{"id":"a","html":"A higher level of independence between testers and developers"},{"id":"b","html":"Fewer reviews, because questions are settled in informal talks"},{"id":"c","html":"Easier communication and interaction within the team"},{"id":"d","html":"Less need for test automation in the delivery pipeline"}],"select":1,"key":["c"],"trap":"source-gap","lo":"FL-1.5.2","k":"K1","rationale":"<p><strong>Why c is correct.<\/strong> In the whole team approach, team members work in a shared workspace, physical or virtual, because co-location makes communication and interaction easier. Better communication and collaboration within the team is one of the advantages that the syllabus names, together with better team dynamics and synergy between the different skill sets.<\/p><p><strong>a) A higher level of independence between testers and developers — the strongest distractor.<\/strong> At first glance, this may look correct because testers and developers appear together, and independence is a familiar quality topic. However, a shared workspace brings testers closer to the developers, which lowers independence rather than raising it. Where a high level of test independence is needed, the whole team approach may not be appropriate.<\/p><p><strong>b) Fewer reviews, because questions are settled in informal talks — incorrect.<\/strong> Reviews remain part of the quality work. Closer communication can make reviews easier to organize; it does not replace them.<\/p><p><strong>d) Less need for test automation in the delivery pipeline — incorrect.<\/strong> A shared workspace says nothing about how much automation the team needs. In the approach, testers work with developers to agree on the test automation approach.<\/p><p><strong>The key learning point:<\/strong> learn the advantages, better team dynamics, better communication and collaboration, and synergy between skill sets, together with the reason for the shared workspace: it makes communication easier.<\/p>","reference":"Syllabus area 1.5.2, <em>Essential Skills and Good Practices in Testing<\/em>","guide":{"href":"chapter-1.html#fl-1-5-2","title":"The whole team approach"}},{"n":8,"chapter":1,"stem":"<p>A software company has its system testing performed by an external test provider instead of by its own developers. Which of the following is a DRAWBACK of this high level of independence?<\/p>","options":[{"id":"a","html":"The testers find fewer defects, because they do not know the code as well as the developers"},{"id":"b","html":"Defects are found later, because independent testers do not start before coding is complete"},{"id":"c","html":"The testers are seen as a bottleneck and may be blamed when the release is delayed"},{"id":"d","html":"The testers share the same assumptions as the developers, so they overlook similar defects"}],"select":1,"key":["c"],"trap":"near-miss","lo":"FL-1.5.3","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> The syllabus names these drawbacks of independence. Independent testers can become isolated from the development team, and this can cause poor collaboration, communication problems or an adversarial relationship. Developers can lose their sense of responsibility for quality. Independent testers can also come to be viewed as a bottleneck, and they may be blamed when a release is delayed. Option c is the last of these.<\/p><p><strong>a) The testers find fewer defects, because they do not know the code as well as the developers — the strongest distractor.<\/strong> This option can seem right at first, because the syllabus does say that developers can find many defects in their own code efficiently. However, that point explains why independence does not replace familiarity. It is not a drawback of independence. Because of their different backgrounds and perspectives, independent testers tend to recognize other kinds of failures and defects than the developers do.<\/p><p><strong>b) Defects are found later, because independent testers do not start before coding is complete — incorrect.<\/strong> When testing starts depends on the lifecycle and the test plan, not on who performs the tests. An independent team can also take part in early reviews and test analysis.<\/p><p><strong>d) The testers share the same assumptions as the developers, so they overlook similar defects — incorrect.<\/strong> This reverses the main benefit. Independent testers bring different assumptions and biases, which is why they can verify or challenge the assumptions made during specification and implementation.<\/p><p><strong>The key learning point:<\/strong> learn the drawbacks as the syllabus lists them: isolation, a weaker sense of responsibility among developers, and testers seen as a bottleneck or blamed for delays.<\/p>","reference":"Syllabus area 1.5.3, <em>Essential Skills and Good Practices in Testing<\/em>","guide":{"href":"chapter-1.html#fl-1-5-3","title":"Independence of testing"}},{"n":9,"chapter":2,"stem":"<p>An organization moves a team from the V-model to an agile approach in which requirements are expected to change throughout the project. The test lead reviews how the team documents and runs its tests. Which change is consistent with the new lifecycle?<\/p>","options":[{"id":"a","html":"More detailed test procedures, written in full before each iteration starts"},{"id":"b","html":"Dynamic testing postponed until the final iteration delivers the complete system"},{"id":"c","html":"Lighter test documentation and more test automation to support regression testing"},{"id":"d","html":"Fewer reviews, because frequent code changes make static testing too costly"}],"select":1,"key":["c"],"trap":"near-miss","lo":"FL-2.1.1","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> Agile development assumes that change can occur throughout the project. For that reason, agile projects favor light documentation of work products and a high degree of test automation, which keeps the growing regression testing manageable in every iteration.<\/p><p><strong>a) More detailed test procedures, written in full before each iteration starts — the strongest distractor.<\/strong> This option is tempting because detailed procedures look like good discipline when a team changes its process. However, procedures written in full before each iteration fit a stable test basis. When requirements change throughout the project, such documents go out of date quickly, which is why agile projects favor lighter documentation.<\/p><p><strong>b) Dynamic testing postponed until the final iteration delivers the complete system — incorrect.<\/strong> This describes the timing of dynamic testing in a sequential model, which the team is leaving. In iterative and agile models each iteration can deliver a working increment, so static and dynamic testing can be performed in every iteration.<\/p><p><strong>d) Fewer reviews, because frequent code changes make static testing too costly — incorrect.<\/strong> Reviews stay valuable in agile development. Testers can review the drafts of work products as soon as they exist, whatever lifecycle the project follows.<\/p><p><strong>The key learning point:<\/strong> the lifecycle shapes how testing is documented and when it runs. Sequential models front-load documents and delay dynamic testing, while agile models favor light documentation, automation, and testing in every iteration.<\/p>","reference":"Syllabus area 2.1.1, <em>Testing in the Context of a Software Development Lifecycle<\/em>.","guide":{"href":"chapter-2.html#fl-2-1-1","title":"How the lifecycle shapes the test process"}},{"n":10,"chapter":2,"stem":"<p>A project moves from a sequential lifecycle to an iterative one. The test manager wants to keep the good testing practices that apply to every software development lifecycle. Which of the following practices should be kept?<\/p>","options":[{"id":"a","html":"Testers wait for the formal approval of a requirement before reviewing it"},{"id":"b","html":"Each test level reuses the test objectives of the level before it"},{"id":"c","html":"Testers review work products as soon as their drafts are available"},{"id":"d","html":"Test analysis for a test level starts once its code is complete"}],"select":1,"key":["c"],"trap":"source-gap","lo":"FL-2.1.2","k":"K1","rationale":"<p><strong>Why c is correct.<\/strong> Early tester involvement is one of the four good testing practices that the syllabus gives for every lifecycle. Testers take part in reviews of work products as soon as the first drafts exist, so that defects are detected earlier and the team can shift left.<\/p><p><strong>a) Testers wait for the formal approval of a requirement before reviewing it — the strongest distractor.<\/strong> This option is tempting because reviewing an approved requirement sounds orderly and avoids wasted effort. However, the good practice is to review drafts as soon as they exist. Waiting for the formal approval delays the feedback that early reviews are meant to give.<\/p><p><strong>b) Each test level reuses the test objectives of the level before it — incorrect.<\/strong> The good practice is the opposite. Each test level has specific and different objectives, so that testing is comprehensive without unnecessary repetition.<\/p><p><strong>d) Test analysis for a test level starts once its code is complete — incorrect.<\/strong> Test analysis and test design for a test level begin during the corresponding development phase, not after the code is complete.<\/p><p><strong>The key learning point:<\/strong> the four practices are a test activity for every development activity, distinct objectives for each test level, test analysis and design that start in the corresponding development phase, and tester reviews of early drafts.<\/p>","reference":"Syllabus area 2.1.2, <em>Testing in the Context of a Software Development Lifecycle<\/em>","guide":{"href":"chapter-2.html#fl-2-1-2","title":"Good testing practices for every lifecycle"}},{"n":11,"chapter":2,"stem":"<p>In test-driven development (TDD), acceptance test-driven development (ATDD) and behavior-driven development (BDD), tests are used to steer the development work. Which testing principle do all three approaches put into practice?<\/p>","options":[{"id":"a","html":"Tests wear out"},{"id":"b","html":"Early testing saves time and money"},{"id":"c","html":"Testing shows the presence, not the absence, of defects"},{"id":"d","html":"Exhaustive testing is impossible"}],"select":1,"key":["b"],"trap":"source-gap","lo":"FL-2.1.3","k":"K1","rationale":"<p><strong>Why b is correct.<\/strong> According to the syllabus, TDD, ATDD and BDD each implement the principle of early testing, because the tests exist before the code they check is written. The three approaches also follow shift left. Defects that are prevented or found while the code is being written cost less to remove than defects found later.<\/p><p><strong>a) Tests wear out — the strongest distractor.<\/strong> At first glance, this may look correct because test-first tests are kept and re-run many times, so the idea of repeated tests comes to mind. However, this principle describes how unchanged tests lose their power to find new defects. It does not explain why the tests are written first.<\/p><p><strong>c) Testing shows the presence, not the absence, of defects — incorrect.<\/strong> This principle describes what testing can and cannot prove. It is true for test-first work as well, but it does not describe what TDD, ATDD and BDD put into practice.<\/p><p><strong>d) Exhaustive testing is impossible — incorrect.<\/strong> This principle explains why testing has to be selective and prioritized. It says nothing about writing tests before the code.<\/p><p><strong>The key learning point:<\/strong> test-first approaches are a direct application of early testing, because the tests come before the code they check.<\/p>","reference":"Syllabus area 2.1.3, <em>Testing in the Context of a Software Development Lifecycle<\/em>","guide":{"href":"chapter-2.html#fl-2-1-3","title":"Test-first approaches: TDD, ATDD, and BDD"}},{"n":12,"chapter":2,"stem":"<p>A team starts reviewing requirement specifications with testers in the first week of the project and runs static analysis on each code commit. Which concept do these practices illustrate?<\/p>","options":[{"id":"a","html":"Risk monitoring"},{"id":"b","html":"Test independence"},{"id":"c","html":"Confirmation testing"},{"id":"d","html":"Shift left"}],"select":1,"key":["d"],"trap":"near-miss","lo":"FL-2.1.5","k":"K2","rationale":"<p><strong>Why d is correct.<\/strong> Shift left means moving testing activities earlier in the lifecycle. Reviewing the requirement specifications in the first week and running static analysis on every commit are the syllabus's own examples of this approach.<\/p><p><strong>a) Risk monitoring — the strongest distractor.<\/strong> At first glance, this may look correct because starting early reduces risk, and \"checking every commit\" sounds like monitoring. However, risk monitoring is a risk management activity that tracks whether mitigation is working. It is not about the early placement of test work.<\/p><p><strong>b) Test independence — incorrect.<\/strong> Independence is about who tests, not about when the testing happens.<\/p><p><strong>c) Confirmation testing — incorrect.<\/strong> Confirmation testing verifies that a specific defect has been fixed. The scenario contains no defect fix.<\/p><p><strong>The key learning point:<\/strong> when a scenario shows test activities happening earlier than usual, the name to reach for is shift left.<\/p>","reference":"Syllabus area 2.1.5, <em>Testing in the Context of a Software Development Lifecycle<\/em>.","guide":{"href":"chapter-2.html#fl-2-1-5","title":"Shift left"}},{"n":13,"chapter":2,"stem":"<p>A team needs to test the interfaces between a university's new enrollment system and the web service of an external student-loan agency, using a test environment that resembles production. Which test level does this testing belong to?<\/p>","options":[{"id":"a","html":"System integration testing"},{"id":"b","html":"Component integration testing"},{"id":"c","html":"System testing"},{"id":"d","html":"Acceptance testing"}],"select":1,"key":["a"],"trap":"near-miss","lo":"FL-2.2.1","k":"K2","rationale":"<p><strong>Why a is correct.<\/strong> System integration testing focuses on the interfaces between the system under test and other systems, including external services. It needs a suitable test environment, preferably one similar to the operational environment, which is what the scenario describes.<\/p><p><strong>b) Component integration testing — the strongest distractor.<\/strong> This option is tempting because the scenario is about integration and interfaces. However, component integration testing covers the interfaces between components inside the system. The partner here is the agency's external service, which places the work one level higher.<\/p><p><strong>c) System testing — incorrect.<\/strong> System testing examines the behavior of the whole system itself. The scenario is specifically about the connection to another organization's service.<\/p><p><strong>d) Acceptance testing — incorrect.<\/strong> Acceptance testing focuses on validation and readiness for deployment, usually from the users' or customers' perspective. It is not the level that verifies an interface to an external system.<\/p><p><strong>The key learning point:<\/strong> when the other side of the interface belongs to a different system or organization, the level is system integration testing.<\/p>","reference":"Syllabus area 2.2.1, <em>Test Levels and Test Types<\/em>","guide":{"href":"chapter-2.html#fl-2-2-1","title":"The five test levels"}},{"n":14,"chapter":2,"stem":"<p>After a defect fix in the invoicing module, the team re-runs the failed test to check the fix, and then re-runs a selection of tests for the payment and reporting modules, which were not changed. Which statement correctly describes these two activities?<\/p>","options":[{"id":"a","html":"Both activities check that the defect has been fixed, so both are confirmation testing"},{"id":"b","html":"The first checks that the defect has been fixed; the second looks for adverse consequences of the fix"},{"id":"c","html":"The first looks for adverse consequences of the fix; the second checks that the defect has been fixed"},{"id":"d","html":"The second activity is maintenance testing, because the unchanged modules are already in operation"}],"select":1,"key":["b"],"trap":"near-miss","lo":"FL-2.2.3","k":"K2","rationale":"<p><strong>Why b is correct.<\/strong> The first activity is confirmation testing: it confirms that the original defect has been fixed, here by re-running the test that failed. The second activity is regression testing: it checks that the change has caused no adverse consequences. Such consequences can appear in the changed component, in other components of the system or in connected systems, which is why the unchanged payment and reporting modules are tested again.<\/p><p><strong>a) Both activities check that the defect has been fixed, so both are confirmation testing — incorrect.<\/strong> Only the first activity checks the fix. The tests for the unchanged modules did not fail because of the defect, so re-running them cannot confirm that it was fixed.<\/p><p><strong>c) The first looks for adverse consequences of the fix; the second checks that the defect has been fixed — the strongest distractor.<\/strong> This option can seem right at first, because it names the right two purposes. However, it attaches them to the wrong activities. Re-running the test that failed confirms the fix, and re-running tests in other modules looks for side effects.<\/p><p><strong>d) The second activity is maintenance testing, because the unchanged modules are already in operation — incorrect.<\/strong> Maintenance testing is the testing of changes to a system in operation, and it can itself include confirmation and regression testing. It does not name the purpose of the second activity.<\/p><p><strong>The key learning point:<\/strong> anchor the pair by purpose. Confirmation testing asks whether the defect is really fixed; regression testing asks whether the change has caused adverse consequences anywhere else.<\/p>","reference":"Syllabus area 2.2.3, <em>Test Levels and Test Types<\/em>","guide":{"href":"chapter-2.html#fl-2-2-3","title":"Confirmation testing and regression testing"}},{"n":15,"chapter":3,"stem":"<p>A team wants to use both reviews and static analysis by tools. Which of the following combinations of an item and a static test technique is appropriate?<\/p>","options":[{"id":"a","html":"A free-text project charter, examined by a static analysis tool"},{"id":"b","html":"Compiled third-party code with no source, examined in a review"},{"id":"c","html":"A supplier contract, examined by a static analysis tool"},{"id":"d","html":"A product backlog item, examined in a review"}],"select":1,"key":["d"],"trap":"near-miss","lo":"FL-3.1.1","k":"K1","rationale":"<p><strong>Why d is correct.<\/strong> A review is possible for any work product that people can read and understand, and product backlog items are among the syllabus examples of work products that static testing can examine. Static analysis by a tool, however, needs a work product with a structure that the tool can check it against, such as code, models or text with a formal syntax.<\/p><p><strong>a) A free-text project charter, examined by a static analysis tool — incorrect.<\/strong> A free-text charter can be reviewed, but it has no formal structure that a static analysis tool could check.<\/p><p><strong>b) Compiled third-party code with no source, examined in a review — the strongest distractor.<\/strong> This option can seem right at first, because it is code, and code is a typical subject of reviews. However, compiled code without its source is hard for people to interpret, and the syllabus names third-party executable code as an example of a work product that is not appropriate for static testing.<\/p><p><strong>c) A supplier contract, examined by a static analysis tool — incorrect.<\/strong> A contract is a good subject for a review, but its free text gives a static analysis tool nothing formal to check against.<\/p><p><strong>The key learning point:<\/strong> reviews need a work product that people can read and understand; static analysis needs a formal structure that a tool can check.<\/p>","reference":"Syllabus area 3.1.1, <em>Static Testing Basics<\/em>","guide":{"href":"chapter-3.html#fl-3-1-1","title":"What static testing can examine"}},{"n":16,"chapter":3,"stem":"<p>A component passed all of its dynamic tests. In a later code review, a reviewer finds that one variable is used before any value is assigned to it, and that one function is so complex that it will be hard to maintain. Which statement BEST explains why the review found these problems?<\/p>","options":[{"id":"a","html":"The dynamic tests were badly designed, because dynamic testing can find every defect that a review can find"},{"id":"b","html":"Reviews execute the code with more combinations of data than the dynamic tests used"},{"id":"c","html":"Static testing examines the work product directly, so it can find defects that have not caused any failure"},{"id":"d","html":"Reviews detect the failures caused by these defects, while dynamic tests detect the defects themselves"}],"select":1,"key":["c"],"trap":"near-miss","lo":"FL-3.1.3","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> Static testing finds defects directly in the work product, without executing it, while dynamic testing finds defects through the failures they cause. Variables with undefined values and excessive code complexity are among the coding defects that the syllabus lists as easier or cheaper to find with static testing. Neither problem had caused a failure in the dynamic tests, so those tests had nothing to reveal.<\/p><p><strong>a) The dynamic tests were badly designed, because dynamic testing can find every defect that a review can find — incorrect.<\/strong> The syllabus states that some defect types can be found only by static testing or only by dynamic testing. A quality characteristic such as maintainability does not depend on executing the code, so static testing is the way to assess it.<\/p><p><strong>b) Reviews execute the code with more combinations of data than the dynamic tests used — incorrect.<\/strong> Reviews do not execute the code at all. They examine it by reading.<\/p><p><strong>d) Reviews detect the failures caused by these defects, while dynamic tests detect the defects themselves — the strongest distractor.<\/strong> This option is tempting because it uses the right pair of concepts, defects and failures. However, it reverses them. A review does not execute anything, so it observes no failures; it finds the defects themselves.<\/p><p><strong>The key learning point:<\/strong> static testing finds defects directly, including defects that never show up as a failure in a test run; dynamic testing finds defects through the failures they cause.<\/p>","reference":"Syllabus area 3.1.3, <em>Static Testing Basics<\/em>","guide":{"href":"chapter-3.html#fl-3-1-3","title":"The structural difference between static and dynamic testing"}},{"n":17,"chapter":3,"stem":"<p>A team lead decides who will take part in a review of a requirements document and when the review meeting will be held. She invites a customer representative, who is not part of the project, to examine the document and report anomalies. Which role does the customer representative take in this review?<\/p>","options":[{"id":"a","html":"Reviewer"},{"id":"b","html":"Manager"},{"id":"c","html":"Scribe"},{"id":"d","html":"Review leader"}],"select":1,"key":["a"],"trap":"near-miss","lo":"FL-3.2.3","k":"K1","rationale":"<p><strong>Why a is correct.<\/strong> The reviewer is the role that carries out the review. The syllabus allows different people in this role, for example a project member, a subject matter expert or another stakeholder, so a customer representative from outside the project can take it.<\/p><p><strong>b) Manager — incorrect.<\/strong> The manager chooses which work products are reviewed and supplies the people and the time for it. The customer representative does neither.<\/p><p><strong>c) Scribe — incorrect.<\/strong> The scribe collates the anomalies from the reviewers and records the review information. The customer representative reports anomalies instead of collecting them.<\/p><p><strong>d) Review leader — the strongest distractor.<\/strong> At first glance, this may look correct because the customer representative was invited personally and has a visible part in the review. However, in this scenario the team lead is the review leader: she decides who takes part and when the review takes place. Examining the document and reporting anomalies is the reviewer's job.<\/p><p><strong>The key learning point:<\/strong> a reviewer does not have to be a project member. Any stakeholder or expert who examines the work product takes the reviewer role.<\/p>","reference":"Syllabus area 3.2.3, <em>Feedback and Review Process<\/em>","guide":{"href":"chapter-3.html#fl-3-2-3","title":"The six roles in reviews"}},{"n":18,"chapter":3,"stem":"<p>A team is deciding between a technical review and an inspection for its database design document. Which statement correctly compares these two review types?<\/p>","options":[{"id":"a","html":"A technical review is led by the author, while an inspection is led by a moderator"},{"id":"b","html":"A technical review mainly aims at consensus and decisions, while an inspection aims at anomalies"},{"id":"c","html":"A technical review collects metrics to improve the process, while an inspection does not"},{"id":"d","html":"A technical review has no defined process, while an inspection follows the generic process"}],"select":1,"key":["b"],"trap":"near-miss","lo":"FL-3.2.4","k":"K2","rationale":"<p><strong>Why b is correct.<\/strong> In a technical review, a moderator leads a group of technically qualified reviewers. Its objectives are to gain consensus and make decisions about a technical problem, although it can also detect anomalies. An inspection is the most formal review type: it follows the complete generic review process, its main objective is to find as many anomalies as possible, and metrics are collected.<\/p><p><strong>a) A technical review is led by the author, while an inspection is led by a moderator — incorrect.<\/strong> A review led by the author is a walkthrough. A technical review is led by a moderator, and in an inspection the author may not take the role of review leader or scribe.<\/p><p><strong>c) A technical review collects metrics to improve the process, while an inspection does not — the strongest distractor.<\/strong> This option can seem right at first, because metrics belong to the formal end of the review spectrum. However, the option attaches them to the wrong type. Collecting metrics to improve the SDLC and the inspection process is a feature of inspections.<\/p><p><strong>d) A technical review has no defined process, while an inspection follows the generic process — incorrect.<\/strong> A review without a defined process is an informal review. A technical review is a formal review type.<\/p><p><strong>The key learning point:<\/strong> compare review types by who leads them, how formal they are and what their main objective is.<\/p>","reference":"Syllabus area 3.2.4, <em>Feedback and Review Process<\/em>","guide":{"href":"chapter-3.html#fl-3-2-4","title":"The four review types by degree of formality"}},{"n":19,"chapter":4,"stem":"<p>A team receives a third-party payment module as a compiled component, with an interface specification but without its source code. The team now chooses test techniques for the module. Which categories of test techniques can the team apply?<\/p>","options":[{"id":"a","html":"Black-box and experience-based techniques, but not white-box techniques"},{"id":"b","html":"Experience-based techniques alone, because no formal technique works without code"},{"id":"c","html":"White-box techniques, because coverage can be measured on any test object"},{"id":"d","html":"Black-box techniques alone, because experience-based techniques need the code"}],"select":1,"key":["a"],"trap":"near-miss","lo":"FL-4.1.1","k":"K2","rationale":"<p><strong>Why a is correct.<\/strong> Black-box techniques derive tests from the specification, and the team has an interface specification. Experience-based techniques rely on the tester's knowledge and experience, which does not depend on the code either. White-box techniques need the internal structure of the test object, and the team has no access to it.<\/p><p><strong>b) Experience-based techniques alone, because no formal technique works without code — incorrect.<\/strong> Black-box techniques are formal techniques that need only a specification. The interface specification is enough to apply them.<\/p><p><strong>c) White-box techniques, because coverage can be measured on any test object — incorrect.<\/strong> Code coverage depends on access to the internal structure. With a compiled component and no source code, the team cannot base tests on the structure or measure structural coverage.<\/p><p><strong>d) Black-box techniques alone, because experience-based techniques need the code — the strongest distractor.<\/strong> This option is tempting because it correctly keeps black-box techniques. However, experience-based techniques draw on the tester's knowledge of similar applications and of likely failures, not on the code, so they remain available.<\/p><p><strong>The key learning point:<\/strong> classify a technique by what it needs. Black-box techniques need the specification, white-box techniques need the internal structure, and experience-based techniques need the tester's knowledge and experience.<\/p>","reference":"Syllabus area 4.1.1, <em>Test Techniques Overview<\/em>.","guide":{"href":"chapter-4.html#fl-4-1-1","title":"Overview of Test Techniques"}},{"n":20,"chapter":4,"stem":"<p>A water utility's billing screen accepts a monthly consumption value in whole cubic meters. A value of 0 is billed only the fixed service fee, values from 1 to 25 are billed at the basic price, and values from 26 to 800 at the higher price. A negative value is rejected with the message \"Consumption cannot be negative\". A value above 800 is not billed; it is sent to a supervisor for a manual meter check. How many partitions, valid and invalid, does equivalence partitioning give for the consumption value?<\/p>","options":[{"id":"a","html":"5"},{"id":"b","html":"4"},{"id":"c","html":"3"},{"id":"d","html":"6"}],"select":1,"key":["a"],"trap":"procedure","lo":"FL-4.2.1","k":"K3","rationale":"<p><strong>Why a is correct.<\/strong> The system processes five groups of values differently: negative values (rejected with a message), exactly 0 (fixed fee only), 1 to 25 (basic price), 26 to 800 (higher price), and values above 800 (sent for a manual check). Each group is one partition, so the total is five.<\/p><p>Step by step: first, list the billed behaviors: 0, 1–25 and 26–800, which gives three. Second, list the values that are not billed: negative values and values above 800, each handled in its own way, which gives two. Third, add them: 3 + 2 = 5.<\/p><p><strong>b) 4 — the strongest distractor.<\/strong> At first glance, 0 looks like the lower end of the basic-price range. However, the system processes 0 differently, with the fixed fee only, so 0 is a partition of its own. Merging it into 1–25 gives four.<\/p><p><strong>c) 3 — incorrect.<\/strong> Three counts only the billed behaviors and leaves out the negative values and the values above 800. Values that are rejected or redirected also form partitions.<\/p><p><strong>d) 6 — incorrect.<\/strong> Six comes from treating a boundary value, such as 25 or 800, as an extra partition. Boundaries belong to boundary value analysis, not to partition counting.<\/p><p><strong>The key learning point:<\/strong> a partition is defined by how the system processes its values. A single value that is processed differently, like 0 here, is a partition of its own, and so is every rejected or redirected range.<\/p>","reference":"Syllabus area 4.2.1, <em>Black-box Test Techniques<\/em>","guide":{"href":"chapter-4.html#fl-4-2-1","title":"Equivalence partitioning"}},{"n":21,"chapter":4,"stem":"<p>A loan application form accepts amounts from 1,000 to 50,000 in whole euros. Amounts up to 20,000 are approved automatically, and amounts above 20,000 are sent for manual approval. Amounts below 1,000 or above 50,000 are rejected. How many distinct amounts does 2-value boundary value analysis require?<\/p>","options":[{"id":"a","html":"4"},{"id":"b","html":"3"},{"id":"c","html":"12"},{"id":"d","html":"6"}],"select":1,"key":["d"],"trap":"procedure","lo":"FL-4.2.2","k":"K3","rationale":"<p><strong>Why d is correct.<\/strong> The amount has four partitions: below 1,000 (rejected), 1,000 to 20,000 (automatic approval), 20,001 to 50,000 (manual approval), and above 50,000 (rejected). In 2-value boundary value analysis, each boundary value is tested together with its nearest neighbor in the adjacent partition. That gives 999 and 1,000, then 20,000 and 20,001, then 50,000 and 50,001, so six distinct values.<\/p><p>Step by step: first, identify the partitions, including the internal one created by the approval rule. Second, list each pair of adjacent boundary values: 999 | 1,000, 20,000 | 20,001, and 50,000 | 50,001. Third, count the distinct values: 2 + 2 + 2 = 6.<\/p><p><strong>a) 4 — the strongest distractor.<\/strong> Four values look complete, because they cover the two outer edges of the range from 1,000 to 50,000. However, the approval rule splits the valid range into two partitions, and the boundary between them, 20,000 | 20,001, must be tested too.<\/p><p><strong>b) 3 — incorrect.<\/strong> Three counts the boundaries between partitions instead of the values. In 2-value boundary value analysis each boundary contributes two values, one on each side.<\/p><p><strong>c) 12 — incorrect.<\/strong> Twelve is the result of 3-value boundary value analysis, which tests each boundary value and both of its neighbors: 998 to 1,001, 19,999 to 20,002, and 49,999 to 50,002. The question asks for the 2-value variant.<\/p><p><strong>The key learning point:<\/strong> find every boundary, including internal ones created by a business rule, then apply the variant that the question names. In 2-value boundary value analysis each boundary gives two values.<\/p>","reference":"Syllabus area 4.2.2, <em>Black-box Test Techniques<\/em>","guide":{"href":"chapter-4.html#fl-4-2-2","title":"Boundary value analysis"}},{"n":22,"chapter":4,"stem":"<p>A shipping fee module makes its decision based on three independent Boolean conditions: the customer has a membership, a coupon code is applied, and the cart total exceeds 500. The team wants to create a full decision table before considering any simplification. How many columns must the full decision table contain?<\/p>","options":[{"id":"a","html":"6"},{"id":"b","html":"8"},{"id":"c","html":"9"},{"id":"d","html":"4"}],"select":1,"key":["b"],"trap":"procedure","lo":"FL-4.2.3","k":"K3","rationale":"<p><strong>Why b is correct.<\/strong> A full decision table contains one column for every combination of condition values. With three Boolean conditions, that is 2 to the power of 3, which is 8 columns. Count the conditions, which are three, and compute 2 × 2 × 2.<\/p><p><strong>a) 6 — the strongest distractor.<\/strong> At first glance, this may look correct because it multiplies two numbers from the question, three conditions and two values. However, each additional condition doubles the number of combinations, so the count is 2 × 2 × 2, which is 2 to the power of 3.<\/p><p><strong>c) 9 — incorrect.<\/strong> Nine is 3 squared, which swaps the base and the exponent.<\/p><p><strong>d) 4 — incorrect.<\/strong> Four is 2 to the power of 2, which leaves one of the three conditions out. A full table is defined before any simplification, so every combination of all three conditions appears.<\/p><p><strong>The key learning point:<\/strong> for n independent Boolean conditions, the full table always has 2ⁿ columns; count the conditions and compute the power.<\/p>","reference":"Syllabus area 4.2.3, <em>Black-box Test Techniques<\/em>.","guide":{"href":"chapter-4.html#fl-4-2-3","title":"Decision table testing"}},{"n":23,"chapter":4,"stem":"<p>An e-scooter rental app is modeled with the following state transitions, and no others:<\/p><table><thead><tr class=\"header\"><th>From<\/th><th>Event<\/th><th>To<\/th><\/tr><\/thead><tbody><tr class=\"odd\"><td>Available<\/td><td>reserve<\/td><td>Reserved<\/td><\/tr><tr class=\"even\"><td>Reserved<\/td><td>cancel<\/td><td>Available<\/td><\/tr><tr class=\"odd\"><td>Reserved<\/td><td>unlock<\/td><td>InUse<\/td><\/tr><tr class=\"even\"><td>InUse<\/td><td>pause<\/td><td>Paused<\/td><\/tr><tr class=\"odd\"><td>Paused<\/td><td>resume<\/td><td>InUse<\/td><\/tr><tr class=\"even\"><td>InUse<\/td><td>end ride<\/td><td>Available<\/td><\/tr><tr class=\"odd\"><td>InUse<\/td><td>report fault<\/td><td>Maintenance<\/td><\/tr><tr class=\"even\"><td>Maintenance<\/td><td>repair<\/td><td>Available<\/td><\/tr><\/tbody><\/table><p>The scooter starts in Available. One test case executes the events reserve, cancel, reserve, unlock, end ride. What valid transitions coverage does this test case achieve?<\/p>","options":[{"id":"a","html":"50%"},{"id":"b","html":"62.5%"},{"id":"c","html":"60%"},{"id":"d","html":"100%"}],"select":1,"key":["a"],"trap":"procedure","lo":"FL-4.2.4","k":"K3","rationale":"<p><strong>Why a is correct.<\/strong> Valid transitions coverage is the number of distinct valid transitions exercised divided by the number of valid transitions in the model. The model has eight transitions. The test case exercises four different ones: Available to Reserved (reserve), Reserved to Available (cancel), Reserved to InUse (unlock), and InUse to Available (end ride). The second reserve repeats a transition that is already covered. Four out of eight is 50%.<\/p><p>Step by step: first, count the transitions in the table: eight. Second, walk the test case from Available and mark each transition it exercises; the second reserve adds nothing new. Third, divide: 4 / 8 = 50%.<\/p><p>The same model, drawn as a state diagram:<\/p><figure><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8IS0tIEdlbmVyYXRlZCBieSBncmFwaHZpeiB2ZXJzaW9uIDIuNDMuMCAoMCkKIC0tPgo8IS0tIFRpdGxlOiBHIFBhZ2VzOiAxIC0tPgo8c3ZnIHdpZHRoPSI1OThwdCIgaGVpZ2h0PSIxMThwdCIKIHZpZXdCb3g9IjAuMDAgMC4wMCA1OTguMDAgMTE4LjAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KPGcgaWQ9ImdyYXBoMCIgY2xhc3M9ImdyYXBoIiB0cmFuc2Zvcm09InNjYWxlKDEgMSkgcm90YXRlKDApIHRyYW5zbGF0ZSg0IDExNCkiPgo8dGl0bGU+RzwvdGl0bGU+CjwhLS0gX19zdGFydCAtLT4KPGcgaWQ9Im5vZGUxIiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5fX3N0YXJ0PC90aXRsZT4KPGVsbGlwc2UgZmlsbD0iYmxhY2siIHN0cm9rZT0iYmxhY2siIGN4PSI2LjUiIGN5PSItNjAiIHJ4PSI2LjUiIHJ5PSI2LjUiLz4KPC9nPgo8IS0tIEF2YWlsYWJsZSAtLT4KPGcgaWQ9Im5vZGUyIiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5BdmFpbGFibGU8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNMTA4LC03OEMxMDgsLTc4IDYyLC03OCA2MiwtNzggNTYsLTc4IDUwLC03MiA1MCwtNjYgNTAsLTY2IDUwLC01NCA1MCwtNTQgNTAsLTQ4IDU2LC00MiA2MiwtNDIgNjIsLTQyIDEwOCwtNDIgMTA4LC00MiAxMTQsLTQyIDEyMCwtNDggMTIwLC01NCAxMjAsLTU0IDEyMCwtNjYgMTIwLC02NiAxMjAsLTcyIDExNCwtNzggMTA4LC03OCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI4NSIgeT0iLTU2LjkiIGZvbnQtZmFtaWx5PSJEZWphVnUgU2FucyIgZm9udC1zaXplPSIxMi4wMCI+QXZhaWxhYmxlPC90ZXh0Pgo8L2c+CjwhLS0gX19zdGFydCYjNDU7Jmd0O0F2YWlsYWJsZSAtLT4KPGcgaWQ9ImVkZ2UxIiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5fX3N0YXJ0JiM0NTsmZ3Q7QXZhaWxhYmxlPC90aXRsZT4KPHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgZD0iTTEzLC02MEMxOC45MiwtNjAgMjguOTMsLTYwIDM5LjYsLTYwIi8+Cjxwb2x5Z29uIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjM5LjkxLC02My41IDQ5LjkxLC02MCAzOS45MSwtNTYuNSAzOS45MSwtNjMuNSIvPgo8L2c+CjwhLS0gUmVzZXJ2ZWQgLS0+CjxnIGlkPSJub2RlMyIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+UmVzZXJ2ZWQ8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNMjU5LC0xMTBDMjU5LC0xMTAgMjExLC0xMTAgMjExLC0xMTAgMjA1LC0xMTAgMTk5LC0xMDQgMTk5LC05OCAxOTksLTk4IDE5OSwtODYgMTk5LC04NiAxOTksLTgwIDIwNSwtNzQgMjExLC03NCAyMTEsLTc0IDI1OSwtNzQgMjU5LC03NCAyNjUsLTc0IDI3MSwtODAgMjcxLC04NiAyNzEsLTg2IDI3MSwtOTggMjcxLC05OCAyNzEsLTEwNCAyNjUsLTExMCAyNTksLTExMCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSIyMzUiIHk9Ii04OC45IiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMiIGZvbnQtc2l6ZT0iMTIuMDAiPlJlc2VydmVkPC90ZXh0Pgo8L2c+CjwhLS0gQXZhaWxhYmxlJiM0NTsmZ3Q7UmVzZXJ2ZWQgLS0+CjxnIGlkPSJlZGdlMiIgY2xhc3M9ImVkZ2UiPgo8dGl0bGU+QXZhaWxhYmxlJiM0NTsmZ3Q7UmVzZXJ2ZWQ8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNMTExLjU3LC03OC4xNUMxMTkuNjUsLTgyLjkyIDEyOC44NiwtODcuNDUgMTM4LC05MCAxNTQuMDcsLTk0LjQ4IDE3Mi4yNSwtOTUuNzcgMTg4LjQzLC05NS42NyIvPgo8cG9seWdvbiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIxODguODIsLTk5LjE2IDE5OC43MywtOTUuNDIgMTg4LjY1LC05Mi4xNiAxODguODIsLTk5LjE2Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjE1OS41IiB5PSItOTguMiIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zIiBmb250LXNpemU9IjExLjAwIj5yZXNlcnZlPC90ZXh0Pgo8L2c+CjwhLS0gUmVzZXJ2ZWQmIzQ1OyZndDtBdmFpbGFibGUgLS0+CjxnIGlkPSJlZGdlMyIgY2xhc3M9ImVkZ2UiPgo8dGl0bGU+UmVzZXJ2ZWQmIzQ1OyZndDtBdmFpbGFibGU8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNMTk4Ljg2LC03OS45QzE5Mi45NCwtNzguMSAxODYuODMsLTc2LjM5IDE4MSwtNzUgMTY0LjYxLC03MS4xIDE0Ni4zOCwtNjcuOTUgMTMwLjMxLC02NS41NSIvPgo8cG9seWdvbiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIxMzAuNSwtNjIuMDQgMTIwLjEsLTY0LjA5IDEyOS41MSwtNjguOTcgMTMwLjUsLTYyLjA0Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjE1OS41IiB5PSItNzguMiIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zIiBmb250LXNpemU9IjExLjAwIj5jYW5jZWw8L3RleHQ+CjwvZz4KPCEtLSBJblVzZSAtLT4KPGcgaWQ9Im5vZGU0IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5JblVzZTwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIGQ9Ik0zODUsLTg0QzM4NSwtODQgMzU1LC04NCAzNTUsLTg0IDM0OSwtODQgMzQzLC03OCAzNDMsLTcyIDM0MywtNzIgMzQzLC02MCAzNDMsLTYwIDM0MywtNTQgMzQ5LC00OCAzNTUsLTQ4IDM1NSwtNDggMzg1LC00OCAzODUsLTQ4IDM5MSwtNDggMzk3LC01NCAzOTcsLTYwIDM5NywtNjAgMzk3LC03MiAzOTcsLTcyIDM5NywtNzggMzkxLC04NCAzODUsLTg0Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjM3MCIgeT0iLTYyLjkiIGZvbnQtZmFtaWx5PSJEZWphVnUgU2FucyIgZm9udC1zaXplPSIxMi4wMCI+SW5Vc2U8L3RleHQ+CjwvZz4KPCEtLSBSZXNlcnZlZCYjNDU7Jmd0O0luVXNlIC0tPgo8ZyBpZD0iZWRnZTQiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPlJlc2VydmVkJiM0NTsmZ3Q7SW5Vc2U8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNMjcxLjI5LC04NS4xQzI5MC4zNCwtODEuMzggMzEzLjgxLC03Ni43OSAzMzIuOTcsLTczLjA0Ii8+Cjxwb2x5Z29uIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjMzMy42OSwtNzYuNDcgMzQyLjgzLC03MS4xMiAzMzIuMzQsLTY5LjYgMzMzLjY5LC03Ni40NyIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSIzMDciIHk9Ii04NC4yIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMiIGZvbnQtc2l6ZT0iMTEuMDAiPnVubG9jazwvdGV4dD4KPC9nPgo8IS0tIEluVXNlJiM0NTsmZ3Q7QXZhaWxhYmxlIC0tPgo8ZyBpZD0iZWRnZTciIGNsYXNzPSJlZGdlIj4KPHRpdGxlPkluVXNlJiM0NTsmZ3Q7QXZhaWxhYmxlPC90aXRsZT4KPHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgZD0iTTM0Mi44OSwtNjEuNThDMzIzLjIsLTU4LjQ4IDI5NS40OSwtNTQuNjIgMjcxLC01MyAyMjIuOTIsLTQ5LjgzIDE2Ny43MiwtNTIuNzcgMTMwLjIxLC01NS43NSIvPgo8cG9seWdvbiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIxMjkuOCwtNTIuMjggMTIwLjEzLC01Ni41OSAxMzAuMzgsLTU5LjI1IDEyOS44LC01Mi4yOCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSIyMzUiIHk9Ii01Ni4yIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMiIGZvbnQtc2l6ZT0iMTEuMDAiPmVuZCByaWRlPC90ZXh0Pgo8L2c+CjwhLS0gUGF1c2VkIC0tPgo8ZyBpZD0ibm9kZTUiIGNsYXNzPSJub2RlIj4KPHRpdGxlPlBhdXNlZDwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIGQ9Ik01NjAuNSwtOTdDNTYwLjUsLTk3IDUyNS41LC05NyA1MjUuNSwtOTcgNTE5LjUsLTk3IDUxMy41LC05MSA1MTMuNSwtODUgNTEzLjUsLTg1IDUxMy41LC03MyA1MTMuNSwtNzMgNTEzLjUsLTY3IDUxOS41LC02MSA1MjUuNSwtNjEgNTI1LjUsLTYxIDU2MC41LC02MSA1NjAuNSwtNjEgNTY2LjUsLTYxIDU3Mi41LC02NyA1NzIuNSwtNzMgNTcyLjUsLTczIDU3Mi41LC04NSA1NzIuNSwtODUgNTcyLjUsLTkxIDU2Ni41LC05NyA1NjAuNSwtOTciLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNTQzIiB5PSItNzUuOSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zIiBmb250LXNpemU9IjEyLjAwIj5QYXVzZWQ8L3RleHQ+CjwvZz4KPCEtLSBJblVzZSYjNDU7Jmd0O1BhdXNlZCAtLT4KPGcgaWQ9ImVkZ2U1IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5JblVzZSYjNDU7Jmd0O1BhdXNlZDwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIGQ9Ik0zOTcuMjUsLTc1LjA5QzQwMy4wMywtNzYuNzEgNDA5LjE3LC03OC4xNiA0MTUsLTc5IDQ0NC4zMSwtODMuMjQgNDc3LjgyLC04My4wMyA1MDMuMDYsLTgxLjg3Ii8+Cjxwb2x5Z29uIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjUwMy41MywtODUuMzUgNTEzLjMzLC04MS4zMyA1MDMuMTYsLTc4LjM2IDUwMy41MywtODUuMzUiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNDQ2LjUiIHk9Ii04NS4yIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMiIGZvbnQtc2l6ZT0iMTEuMDAiPnBhdXNlPC90ZXh0Pgo8L2c+CjwhLS0gTWFpbnRlbmFuY2UgLS0+CjxnIGlkPSJub2RlNiIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+TWFpbnRlbmFuY2U8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNNTc4LC0zNkM1NzgsLTM2IDUwOCwtMzYgNTA4LC0zNiA1MDIsLTM2IDQ5NiwtMzAgNDk2LC0yNCA0OTYsLTI0IDQ5NiwtMTIgNDk2LC0xMiA0OTYsLTYgNTAyLDAgNTA4LDAgNTA4LDAgNTc4LDAgNTc4LDAgNTg0LDAgNTkwLC02IDU5MCwtMTIgNTkwLC0xMiA1OTAsLTI0IDU5MCwtMjQgNTkwLC0zMCA1ODQsLTM2IDU3OCwtMzYiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNTQzIiB5PSItMTQuOSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zIiBmb250LXNpemU9IjEyLjAwIj5NYWludGVuYW5jZTwvdGV4dD4KPC9nPgo8IS0tIEluVXNlJiM0NTsmZ3Q7TWFpbnRlbmFuY2UgLS0+CjxnIGlkPSJlZGdlOCIgY2xhc3M9ImVkZ2UiPgo8dGl0bGU+SW5Vc2UmIzQ1OyZndDtNYWludGVuYW5jZTwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIGQ9Ik0zOTcuMTYsLTUzLjAzQzQwMi45NSwtNTAuNDYgNDA5LjExLC00Ny45NiA0MTUsLTQ2IDQzNy43NSwtMzguNDEgNDYzLjQ5LC0zMi4zIDQ4NS44MiwtMjcuNzUiLz4KPHBvbHlnb24gZmlsbD0iYmxhY2siIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNDg2LjY5LC0zMS4xNCA0OTUuODIsLTI1Ljc2IDQ4NS4zMywtMjQuMjggNDg2LjY5LC0zMS4xNCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI0NDYuNSIgeT0iLTQ5LjIiIGZvbnQtZmFtaWx5PSJEZWphVnUgU2FucyIgZm9udC1zaXplPSIxMS4wMCI+cmVwb3J0IGZhdWx0PC90ZXh0Pgo8L2c+CjwhLS0gUGF1c2VkJiM0NTsmZ3Q7SW5Vc2UgLS0+CjxnIGlkPSJlZGdlNiIgY2xhc3M9ImVkZ2UiPgo8dGl0bGU+UGF1c2VkJiM0NTsmZ3Q7SW5Vc2U8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNNTEzLjI2LC03MC43OEM1MDIuMzIsLTY4LjA0IDQ4OS42OCwtNjUuMzUgNDc4LC02NCA0NTAuMTksLTYwLjc4IDQ0Mi45OSwtNjMuMzYgNDE1LC02NCA0MTIuNDYsLTY0LjA2IDQwOS44MywtNjQuMTMgNDA3LjE5LC02NC4yMiIvPgo8cG9seWdvbiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0MDYuOTEsLTYwLjczIDM5Ny4wNSwtNjQuNjIgNDA3LjE4LC02Ny43MyA0MDYuOTEsLTYwLjczIi8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ0Ni41IiB5PSItNjcuMiIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zIiBmb250LXNpemU9IjExLjAwIj5yZXN1bWU8L3RleHQ+CjwvZz4KPCEtLSBNYWludGVuYW5jZSYjNDU7Jmd0O0F2YWlsYWJsZSAtLT4KPGcgaWQ9ImVkZ2U5IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5NYWludGVuYW5jZSYjNDU7Jmd0O0F2YWlsYWJsZTwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIGQ9Ik00OTUuODMsLTIwLjI0QzQ3MS43MywtMjEuNDggNDQxLjc3LC0yMy4xNSA0MTUsLTI1IDI5MS43NiwtMzMuNTEgMjYwLjA2LC0yOC45NSAxMzgsLTQ4IDEzNS40OCwtNDguMzkgMTMyLjg5LC00OC44NCAxMzAuMjksLTQ5LjMzIi8+Cjxwb2x5Z29uIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjEyOS4zOCwtNDUuOTQgMTIwLjI3LC01MS4zNiAxMzAuNzYsLTUyLjggMTI5LjM4LC00NS45NCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSIzMDciIHk9Ii0zNC4yIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMiIGZvbnQtc2l6ZT0iMTEuMDAiPnJlcGFpcjwvdGV4dD4KPC9nPgo8L2c+Cjwvc3ZnPgo=\" alt=\"\" /><figcaption>State diagram<\/figcaption><\/figure><p><strong>b) 62.5% — the strongest distractor.<\/strong> The test case does execute five steps, which makes 5 / 8 look right. However, 5 / 8 counts the repeated reserve twice. Coverage counts each transition once, however often a test exercises it.<\/p><p><strong>c) 60% — incorrect.<\/strong> Sixty percent is all states coverage: the test case visits three of the five states (Available, Reserved and InUse). The question asks for valid transitions coverage.<\/p><p><strong>d) 100% — incorrect.<\/strong> The sequence is a valid test case, because every step exists in the table. Being valid does not make it complete: four transitions (pause, resume, report fault and repair) are never exercised.<\/p><p><strong>The key learning point:<\/strong> for transition coverage, count distinct transitions exercised and divide by all valid transitions. Repeated transitions count once, and states visited are a different measure.<\/p>","reference":"Syllabus area 4.2.4, <em>Black-box Test Techniques<\/em>.","guide":{"href":"chapter-4.html#fl-4-2-4","title":"State transition testing"}},{"n":24,"chapter":4,"stem":"<p>A component has 50 executable statements, and the existing test cases exercise 40 of them, which gives 80 percent statement coverage. A tester adds three new test cases and runs the whole test suite again. The statement coverage is still 80 percent. Which explanation is correct?<\/p>","options":[{"id":"a","html":"The new test cases failed, and statements exercised by a failed test do not count toward coverage"},{"id":"b","html":"Statement coverage is measured against the requirements, and no new requirements were covered"},{"id":"c","html":"Adding test cases also adds executable statements to the total, so the percentage stays the same"},{"id":"d","html":"The new test cases run only statements that the earlier test cases had already exercised"}],"select":1,"key":["d"],"trap":"near-miss","lo":"FL-4.3.1","k":"K2","rationale":"<p><strong>Why d is correct.<\/strong> Statement coverage divides the number of statements that the test cases exercised by the total number of executable statements. A new test case raises the figure only if it exercises at least one statement that no earlier test case reached. The figure stayed at 40 of 50, so the three new tests ran only statements that were already covered. The ten unexercised statements need test cases whose inputs lead into them.<\/p><p><strong>a) The new test cases failed, and statements exercised by a failed test do not count toward coverage — the strongest distractor.<\/strong> This option can seem right at first, because a failed test can feel like a test that does not count. However, statement coverage measures which statements the tests exercised, not whether the tests passed. A failed test has still exercised the statements on its path.<\/p><p><strong>b) Statement coverage is measured against the requirements, and no new requirements were covered — incorrect.<\/strong> This describes requirements coverage, which is a black-box measure. Statement coverage is measured on the code.<\/p><p><strong>c) Adding test cases also adds executable statements to the total, so the percentage stays the same — incorrect.<\/strong> The number of executable statements is a property of the code, so adding test cases does not change it.<\/p><p><strong>The key learning point:<\/strong> a new test raises statement coverage only if it reaches code that no earlier test reached. More test cases do not by themselves mean more coverage.<\/p>","reference":"Syllabus area 4.3.1, <em>White-box Test Techniques<\/em>","guide":{"href":"chapter-4.html#fl-4-3-1","title":"Statement testing"}},{"n":25,"chapter":4,"stem":"<p>During a design review, a team walks through the pseudocode of a new interest-calculation routine. No executable code exists yet. The team draws the control flow graph of the routine and checks that every decision outcome in the logic has been considered. Which statement about this practice is correct?<\/p>","options":[{"id":"a","html":"It is experience-based testing, because white-box testing needs an executable test object"},{"id":"b","html":"It is black-box testing, because the pseudocode is part of the specification"},{"id":"c","html":"It applies white-box techniques in static testing, before any code can be executed"},{"id":"d","html":"It is not testing, because white-box coverage requires running the code"}],"select":1,"key":["c"],"trap":"near-miss","lo":"FL-4.3.3","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> White-box techniques are not limited to dynamic testing. Teams can also apply them in static testing, for example when they dry-run code or review pseudocode and other high-level logic that a control flow graph can represent. Checking the decision outcomes of the routine before any code exists is such a use.<\/p><p><strong>a) It is experience-based testing, because white-box testing needs an executable test object — incorrect.<\/strong> The practice is built on the control flow graph of the logic, not on the tester's experience. White-box techniques do not require executable code.<\/p><p><strong>b) It is black-box testing, because the pseudocode is part of the specification — the strongest distractor.<\/strong> Pseudocode is a design document rather than code, so this option can seem right. However, the team analyzes the internal logic and its decision outcomes, which is structure-based work, not deriving tests from the specified behavior.<\/p><p><strong>d) It is not testing, because white-box coverage requires running the code — incorrect.<\/strong> Measuring coverage during execution is one use of white-box testing, but not the only one. Analyzing the logic in a review is static testing, and static testing is testing.<\/p><p><strong>The key learning point:<\/strong> white-box testing is defined by its basis, the internal structure, not by whether the code runs. It can support static testing as well as dynamic testing.<\/p>","reference":"Syllabus area 4.3.3, <em>White-box Test Techniques<\/em>.","guide":{"href":"chapter-4.html#fl-4-3-3","title":"The value of white-box testing"}},{"n":26,"chapter":4,"stem":"<p>A tester joins the project for a new parcel-tracking app and has no history of earlier releases to draw on. She builds a list of failure types that are commonly reported for mobile apps, such as lost input after the screen is rotated and wrong behavior when the network connection drops, and designs one test to provoke each failure type. Which test technique is she applying?<\/p>","options":[{"id":"a","html":"Checklist-based testing"},{"id":"b","html":"Error guessing"},{"id":"c","html":"Exploratory testing"},{"id":"d","html":"State transition testing"}],"select":1,"key":["b"],"trap":"near-miss","lo":"FL-4.4.1","k":"K2","rationale":"<p><strong>Why b is correct.<\/strong> Fault attacks are a way to implement error guessing. The tester creates or acquires a list of possible errors, defects and failures, and designs tests that expose the defects or cause the failures. Such lists can draw on experience, on records of past defects and failures, or on general knowledge of why software fails, which is the source used here.<\/p><p><strong>a) Checklist-based testing — the strongest distractor.<\/strong> This option is tempting because the tester works from a list. However, the checklist in checklist-based testing holds test conditions to be checked. This list holds failure types to be provoked, and attacking predicted failures is how a fault attack implements error guessing.<\/p><p><strong>c) Exploratory testing — incorrect.<\/strong> In exploratory testing, tests are designed, executed and evaluated while the tester is learning about the test object. Here the tests are designed in advance from a prepared list.<\/p><p><strong>d) State transition testing — incorrect.<\/strong> State transition testing derives tests from a model of states and transitions. The tester here works from a list of failure types, not from a state model.<\/p><p><strong>The key learning point:<\/strong> a list of failures to provoke points to a fault attack, and a fault attack is a way to implement error guessing.<\/p>","reference":"Syllabus area 4.4.1, <em>Experience-based Test Techniques<\/em>","guide":{"href":"chapter-4.html#fl-4-4-1","title":"Error guessing"}},{"n":27,"chapter":4,"stem":"<p>A tester evaluates a new mobile banking screen against a list of ten usability heuristics, such as \"Does the app keep the user informed about what is going on?\" Which statement about this practice is correct?<\/p>","options":[{"id":"a","html":"It is checklist-based testing, which can also support non-functional testing such as usability"},{"id":"b","html":"It cannot be checklist-based testing, because checklists do not support usability testing"},{"id":"c","html":"It is error guessing, because the heuristics anticipate the errors that developers make"},{"id":"d","html":"It is exploratory testing, because the checklist items are phrased as questions"}],"select":1,"key":["a"],"trap":"near-miss","lo":"FL-4.4.3","k":"K2","rationale":"<p><strong>Why a is correct.<\/strong> The tester checks the screen item by item against a list of test conditions, the heuristics, which is checklist-based testing. Checklists can support various test types, including non-functional testing, and a set of usability heuristics is one example.<\/p><p><strong>b) It cannot be checklist-based testing, because checklists do not support usability testing — incorrect.<\/strong> Checklists are not limited to functional testing. They can support non-functional test types as well, and usability is one of them.<\/p><p><strong>c) It is error guessing, because the heuristics anticipate the errors that developers make — the strongest distractor.<\/strong> Heuristics are built from experience, which makes error guessing look plausible. However, in error guessing the tester anticipates errors, defects and failures and designs tests to expose them. Here the tester works through a fixed list and checks the screen against each item, which is checklist-based testing.<\/p><p><strong>d) It is exploratory testing, because the checklist items are phrased as questions — incorrect.<\/strong> Checklist items can be phrased as questions; that does not make the testing exploratory. In exploratory testing the tester designs, executes and evaluates tests at the same time and learns about the test object as the work goes on.<\/p><p><strong>The key learning point:<\/strong> checklist-based testing means checking the test object against a list of items, and the list can target functional or non-functional characteristics.<\/p>","reference":"Syllabus area 4.4.3, <em>Experience-based Test Techniques<\/em>.","guide":{"href":"chapter-4.html#fl-4-4-3","title":"Checklist-based testing"}},{"n":28,"chapter":4,"stem":"<p>A product owner writes the following for a user story: \"Given a registered user with items in the cart, When the user applies a valid coupon, Then the discounted total is displayed.\" Which way of writing acceptance criteria does this illustrate?<\/p>","options":[{"id":"a","html":"Rule-oriented"},{"id":"b","html":"Checklist-oriented"},{"id":"c","html":"Scenario-oriented"},{"id":"d","html":"Specification-oriented"}],"select":1,"key":["c"],"trap":"source-gap","lo":"FL-4.5.2","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> The Given/When/Then structure expresses an acceptance criterion as a scenario: a starting context, an action, and an expected outcome. The syllabus names this the scenario-oriented way of writing acceptance criteria.<\/p><p><strong>a) Rule-oriented — the strongest distractor.<\/strong> At first glance, this may look correct because rule-oriented is the other legitimate format that the syllabus names — a bullet list of verifiable conditions. Candidates who remember that there are two formats, but not which is which, pick it.<\/p><p><strong>b) Checklist-oriented — incorrect.<\/strong> This is not one of the named formats for acceptance criteria.<\/p><p><strong>d) Specification-oriented — incorrect.<\/strong> This is also not a named format. It borrows vocabulary from elsewhere in the syllabus to look plausible.<\/p><p><strong>The key learning point:<\/strong> there are exactly two named formats — scenario-oriented (Given/When/Then) and rule-oriented (a verification list). Map the example to its shape.<\/p>","reference":"Syllabus area 4.5.2, <em>Collaboration-based Test Approaches<\/em>.","guide":{"href":"chapter-4.html#fl-4-5-2","title":"Acceptance criteria"}},{"n":29,"chapter":4,"stem":"<p>A user story for a library app has this acceptance criterion: \"A member can have at most 5 books on loan at the same time. A request for a 6th book is refused with the message 'Loan limit reached'.\" Following ATDD, which test case correctly verifies the refusal part of this criterion?<\/p>","options":[{"id":"a","html":"Precondition: the member has 4 books on loan — Action: request one more book — Expected result: the loan is accepted"},{"id":"b","html":"Precondition: the member has 5 books on loan — Action: request one more book — Expected result: the request is refused with \"Loan limit reached\""},{"id":"c","html":"Precondition: the member has 6 books on loan — Action: request one more book — Expected result: the request is refused with \"Loan limit reached\""},{"id":"d","html":"Precondition: the member has 5 books on loan — Action: return one book, then request another — Expected result: the loan is accepted"}],"select":1,"key":["b"],"trap":"procedure","lo":"FL-4.5.3","k":"K3","rationale":"<p><strong>Why b is correct.<\/strong> The refusal part of the criterion applies when a member who already has the maximum of 5 books asks for a 6th. Option b sets exactly that precondition, performs the request, and expects the refusal with the specified message, so it verifies the criterion as written.<\/p><p>Step by step: first, find the condition that triggers the refusal: 5 books already on loan. Second, build the precondition from it. Third, take the expected result from the criterion, including the exact message.<\/p><p><strong>a) Four books on loan, expecting the loan to be accepted — incorrect.<\/strong> This test verifies the other part of the criterion, that a member below the limit can borrow. It is a useful test, but it does not check the refusal.<\/p><p><strong>c) Six books on loan, expecting the refusal — the strongest distractor.<\/strong> Its expected result is the right one, which makes this option attractive. However, its precondition contradicts the criterion: a member cannot have 6 books on loan, so the situation cannot be set up, and the test would not show what happens at the limit.<\/p><p><strong>d) Return one book first, then request another — incorrect.<\/strong> After the return, the member has 4 books, so the request is accepted. The test checks that a returned book frees a place, which the criterion does not state, and it never reaches the refusal.<\/p><p><strong>The key learning point:<\/strong> in ATDD, derive the precondition and the expected result directly from the acceptance criterion. A test case whose precondition the criterion makes impossible cannot verify it.<\/p>","reference":"Syllabus area 4.5.3, <em>Collaboration-based Test Approaches<\/em>.","guide":{"href":"chapter-4.html#fl-4-5-3","title":"Acceptance test-driven development"}},{"n":30,"chapter":5,"stem":"<p>The system test cycle of a booking platform is planned to start on Monday. On Friday, the test manager learns that the test data for the cycle will not be available until Wednesday. The test plan lists the availability of the test data as an entry criterion. Which statement is correct?<\/p>","options":[{"id":"a","html":"The exit criteria of the previous test cycle are now violated, so that cycle has to be repeated"},{"id":"b","html":"Starting on schedule would skip a precondition, which is likely to make the testing costlier and riskier"},{"id":"c","html":"The test data is an acceptance criterion of the user stories, so the product owner must approve the delay"},{"id":"d","html":"The coverage criteria of the cycle must be lowered, so that the cycle can still finish on time"}],"select":1,"key":["b"],"trap":"near-miss","lo":"FL-5.1.3","k":"K2","rationale":"<p><strong>Why b is correct.<\/strong> Entry criteria define the preconditions for undertaking an activity. The syllabus names the availability of resources, including test data, as a typical entry criterion. It also explains that when entry criteria are not met, the activity is likely to become more difficult, more time-consuming, more costly and riskier.<\/p><p><strong>a) The exit criteria of the previous test cycle are now violated, so that cycle has to be repeated — the strongest distractor.<\/strong> At first glance, this may look correct because a missing precondition sounds like a failed gate. However, exit criteria state what an activity must achieve before it can be declared complete. The problem here concerns the start of the next cycle, so it is a matter of entry criteria. In agile terms, entry criteria correspond to the Definition of Ready, and exit criteria to the Definition of Done.<\/p><p><strong>c) The test data is an acceptance criterion of the user stories, so the product owner must approve the delay — incorrect.<\/strong> Acceptance criteria are conditions that a user story or a system must meet to be accepted. The availability of test data is a precondition for testing, not an acceptance criterion.<\/p><p><strong>d) The coverage criteria of the cycle must be lowered, so that the cycle can still finish on time — incorrect.<\/strong> Nothing in the scenario concerns coverage. Changing the coverage target would change what the cycle must achieve, not the precondition for starting it.<\/p><p><strong>The key learning point:<\/strong> ask what the criterion controls. If it controls starting, it is an entry criterion; if it controls finishing, it is an exit criterion.<\/p>","reference":"Syllabus area 5.1.3, <em>Test Planning<\/em>","guide":{"href":"chapter-5.html#fl-5-1-3","title":"Managing entry criteria and exit criteria"}},{"n":31,"chapter":5,"stem":"<p>In the test pyramid model, how do the tests typically change as you move from the bottom layer towards the top layer?<\/p>","options":[{"id":"a","html":"They become more isolated and run faster, because each one checks a larger part"},{"id":"b","html":"They become more numerous, because each one checks a smaller part of the system"},{"id":"c","html":"They keep the same granularity, but they are run by a different group of testers"},{"id":"d","html":"They become less isolated and slower, and each one checks a larger part"}],"select":1,"key":["d"],"trap":"near-miss","lo":"FL-5.1.6","k":"K1","rationale":"<p><strong>Why d is correct.<\/strong> Moving up the pyramid, granularity and isolation decrease, and execution time increases. At the bottom, the tests are small, isolated and fast, and each one checks a small piece of functionality. Tests at the top are complex end-to-end tests that each cover a large piece of functionality, so a few of them are usually enough.<\/p><p>A compact picture of the model:<\/p><pre><code>  [ end-to-end ]  few, slow\n [ integration  ]\n[ component      ] many, fast<\/code><\/pre><p><strong>a) They become more isolated and run faster, because each one checks a larger part — the strongest distractor.<\/strong> This option is tempting because it contains one correct element, the larger part of functionality. However, it reverses the other two. Tests higher up the pyramid are less isolated and slower, not more isolated and faster.<\/p><p><strong>b) They become more numerous, because each one checks a smaller part of the system — incorrect.<\/strong> The count goes the other way. Many tests are needed at the bottom, and only a few at the top.<\/p><p><strong>c) They keep the same granularity, but they are run by a different group of testers — incorrect.<\/strong> The model describes differences in granularity between the layers. It says nothing about which group of testers runs them.<\/p><p><strong>The key learning point:<\/strong> picture the shape. A wide bottom means many fast, isolated tests; a narrow top means few slow tests that each cover a large piece of functionality.<\/p>","reference":"Syllabus area 5.1.6, <em>Test Planning<\/em>","guide":{"href":"chapter-5.html#fl-5-1-6","title":"The test pyramid"}},{"n":32,"chapter":5,"stem":"<p>A team maps its planned tests onto the testing quadrants and finds that it has no tests in quadrant Q3. Which planned addition would fill this gap?<\/p>","options":[{"id":"a","html":"Sessions in which end users explore the new claims workflow and report what confuses them"},{"id":"b","html":"Examples agreed with the product owner to guide the development of each user story"},{"id":"c","html":"Automated component integration tests that run in the CI pipeline on every commit"},{"id":"d","html":"Load tests that measure the response times of the claims service under peak traffic"}],"select":1,"key":["a"],"trap":"near-miss","lo":"FL-5.1.7","k":"K2","rationale":"<p><strong>Why a is correct.<\/strong> Quadrant Q3 is business-facing and critiques the product. It contains exploratory testing, usability testing and user acceptance testing, which are user-oriented and often manual. End users exploring the workflow and reporting what confuses them combine exploratory and usability testing.<\/p><p><strong>b) Examples agreed with the product owner to guide the development of each user story — the strongest distractor.<\/strong> This option can seem right at first, because Q2 is also business-facing and works with the product owner. However, examples that guide development support the team. Q3 tests critique the product by measuring its behavior against the users' expectations.<\/p><p><strong>c) Automated component integration tests that run in the CI pipeline on every commit — incorrect.<\/strong> Automated component integration tests in the CI pipeline belong to Q1, which is technology-facing and supports the team.<\/p><p><strong>d) Load tests that measure the response times of the claims service under peak traffic — incorrect.<\/strong> Load tests are non-functional tests other than usability, so they belong to Q4, which is technology-facing and critiques the product.<\/p><p><strong>The key learning point:<\/strong> place a test by answering two questions in order: does it face the business or the technology, and does it support the team or critique the product?<\/p>","reference":"Syllabus area 5.1.7, <em>Test Planning<\/em>","guide":{"href":"chapter-5.html#fl-5-1-7","title":"The testing quadrants"}},{"n":33,"chapter":5,"stem":"<p>Risk analysis shows a high product risk that the new tax module may calculate wrong amounts for cross-border orders. The team decides to test the tax rules with decision table testing, to have a tax specialist review the design, and to have the system tests of this module performed by an independent tester. What do these decisions represent?<\/p>","options":[{"id":"a","html":"Risk acceptance"},{"id":"b","html":"Risk transfer"},{"id":"c","html":"A contingency plan"},{"id":"d","html":"Risk mitigation"}],"select":1,"key":["d"],"trap":"near-miss","lo":"FL-5.2.4","k":"K2","rationale":"<p><strong>Why d is correct.<\/strong> Risk mitigation implements actions that reduce the risk level. The syllabus lists ways to mitigate product risks by testing, among them applying appropriate test techniques and coverage levels, performing reviews, and applying an appropriate level of test independence. The team's three decisions are exactly such actions.<\/p><p><strong>a) Risk acceptance — incorrect.<\/strong> Accepting a risk means deciding to take no action against it. The team is clearly acting.<\/p><p><strong>b) Risk transfer — the strongest distractor.<\/strong> At first glance, this may look correct because two people from outside the team, a tax specialist and an independent tester, become involved. However, risk transfer moves the consequences of a risk to a third party, for example through a contract or an insurance policy. Here the outside people help to reduce the risk, and the risk itself stays with the organization.<\/p><p><strong>c) A contingency plan — incorrect.<\/strong> A contingency plan prepares what to do if the risk occurs. The team's decisions aim to reduce the risk before that happens.<\/p><p><strong>The key learning point:<\/strong> name the risk response by its mechanism: reduce the risk (mitigation), move its consequences to a third party (transfer), prepare a fallback (contingency plan), or knowingly take no action (acceptance).<\/p>","reference":"Syllabus area 5.2.4, <em>Risk Management<\/em>","guide":{"href":"chapter-5.html#fl-5-2-4","title":"Risk-based testing and risk control"}},{"n":34,"chapter":5,"stem":"<p>A test manager applies estimation based on ratios. In the organization's previous comparable project, development took 1,100 person-days and testing took 440 person-days. The new project's development is planned at 850 person-days. What test effort does this technique give?<\/p>","options":[{"id":"a","html":"170 person-days"},{"id":"b","html":"340 person-days"},{"id":"c","html":"2,125 person-days"},{"id":"d","html":"1,190 person-days"}],"select":1,"key":["b"],"trap":"procedure","lo":"FL-5.1.4","k":"K3","rationale":"<p><strong>Why b is correct.<\/strong> On the comparable project, development and test effort were 1,100 and 440 person-days, a ratio of 5:2 (1,100 / 440 = 2.5). Test effort is therefore two fifths of development effort: 850 × 2/5 = 340 person-days.<\/p><p>Step by step: first, derive the ratio from the historical data: 1,100 : 440 = 5:2 (development to test). Second, write it as a fraction with a direction: test = development × 2/5. Third, multiply: 850 × 2/5 = 340.<\/p><p><strong>a) 170 person-days — incorrect.<\/strong> This is one part of the ratio only: 850 / 5 = 170 is the size of one of the five development parts. The test side has two such parts.<\/p><p><strong>c) 2,125 person-days — the strongest distractor.<\/strong> This option is tempting because it keeps the idea of a ratio. However, it applies the ratio upside down (850 × 5/2), which makes the testing much larger than the development. Reading the direction of the ratio is the core of the question.<\/p><p><strong>d) 1,190 person-days — incorrect.<\/strong> This is the total project effort, development plus test (850 + 340). The question asks for the test effort alone.<\/p><p><strong>The key learning point:<\/strong> write the ratio as a directed fraction before computing. Development to test of 5:2 means test = development × 2/5.<\/p>","reference":"Syllabus area 5.1.4, <em>Test Planning<\/em>","guide":{"href":"chapter-5.html#fl-5-1-4","title":"Estimation techniques"}},{"n":35,"chapter":5,"stem":"<p>Four test cases are awaiting execution. Risk-based prioritization is used: higher risk level means earlier execution. There is one dependency: TC2 can only run after TC4 has produced its output data.<\/p><table><thead><tr class=\"header\"><th>Test case<\/th><th>Risk level of covered risk<\/th><\/tr><\/thead><tbody><tr class=\"odd\"><td>TC1<\/td><td>Medium<\/td><\/tr><tr class=\"even\"><td>TC2<\/td><td>High<\/td><\/tr><tr class=\"odd\"><td>TC3<\/td><td>Low<\/td><\/tr><tr class=\"even\"><td>TC4<\/td><td>High<\/td><\/tr><\/tbody><\/table><p>Which execution order is correct?<\/p>","options":[{"id":"a","html":"TC2, TC4, TC1, TC3"},{"id":"b","html":"TC1, TC2, TC3, TC4"},{"id":"c","html":"TC3, TC1, TC2, TC4"},{"id":"d","html":"TC4, TC2, TC1, TC3"}],"select":1,"key":["d"],"trap":"procedure","lo":"FL-5.1.5","k":"K3","rationale":"<p><strong>Why d is correct.<\/strong> Risk-based prioritization puts the two high-risk test cases first. However, TC2 needs the output data that TC4 produces, so TC4 must run before TC2. After the high-risk pair come TC1 (medium) and TC3 (low).<\/p><p>Step by step: first, sort by risk. The high-risk pair TC2 and TC4 leads, then TC1, then TC3. Second, apply the dependency: TC2 cannot start before TC4, so TC4 takes the first slot. The order becomes TC4, TC2, TC1, TC3.<\/p><p><strong>a) TC2, TC4, TC1, TC3 — the strongest distractor.<\/strong> At first glance, this may look correct because it runs the high-risk pair first and the rest in risk order. However, it runs TC2 before the test case that creates its input data. Dependencies can override the ideal priority order, and that is precisely what the syllabus warns about.<\/p><p><strong>b) TC1, TC2, TC3, TC4 — incorrect.<\/strong> This is plain identifier order. No prioritization has been applied.<\/p><p><strong>c) TC3, TC1, TC2, TC4 — incorrect.<\/strong> This is risk order inverted, starting with the lowest risk.<\/p><p><strong>The key learning point:<\/strong> apply the strategy first, then check the dependencies, and let a dependency pull its prerequisite forward.<\/p>","reference":"Syllabus area 5.1.5, <em>Test Planning<\/em>.","guide":{"href":"chapter-5.html#fl-5-1-5","title":"Test case prioritisation"}},{"n":36,"chapter":5,"stem":"<p>During a test cycle, the test manager distributes a report covering what was tested since the last report, the defects found, and the risks that changed. After all testing is finished, a different report summarizes the testing performed, deviations from the plan, and lessons learned for future projects. What are these two reports, respectively?<\/p>","options":[{"id":"a","html":"A test progress report, then a test completion report"},{"id":"b","html":"A test plan, then a test summary report"},{"id":"c","html":"A test completion report, then a test progress report"},{"id":"d","html":"A defect report, then a test progress report"}],"select":1,"key":["a"],"trap":"near-miss","lo":"FL-5.3.2","k":"K2","rationale":"<p><strong>Why a is correct.<\/strong> A report issued during the test cycle, covering what was tested since the last report, the defects found, and the changed risks, is a test progress report. A report issued after all testing is finished, summarizing the testing performed, the deviations from the plan, and the lessons learned, is a test completion report.<\/p><p><strong>b) A test plan, then a test summary report — incorrect.<\/strong> A test plan is forward-looking and is not a report on testing performed. \"Test summary report\" is not the v4.0 name for the closing report.<\/p><p><strong>c) A completion report, then a progress report — the strongest distractor.<\/strong> This option can seem right at first, because it names the right two artifacts. However, it reverses their roles. Candidates who do not anchor \"progress means during, completion means after\" swap them.<\/p><p><strong>d) A defect report, then a progress report — incorrect.<\/strong> A defect report documents a single anomaly. It is not a periodic report on the testing as a whole.<\/p><p><strong>The key learning point:<\/strong> anchor the pair on time. During testing you issue progress reports; after a stage finishes you issue one completion report.<\/p>","reference":"Syllabus area 5.3.2, <em>Test Monitoring, Test Control and Test Completion<\/em>.","guide":{"href":"chapter-5.html#fl-5-3-2","title":"Test reports: progress and completion"}},{"n":37,"chapter":5,"stem":"<p>A defect that was fixed two releases ago reappears in production, and the team cannot determine which version of the test data and scripts was used in the failing release's test cycle. Which practice would have prevented this problem?<\/p>","options":[{"id":"a","html":"Increasing the level of test automation in the regression suite"},{"id":"b","html":"Defining stricter exit criteria for system testing"},{"id":"c","html":"Configuration management of the test items and testware, with version control and baselines"},{"id":"d","html":"Writing more detailed defect reports, including full version information, during the original fix"}],"select":1,"key":["c"],"trap":"source-gap","lo":"FL-5.4.1","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> Configuration management uniquely identifies and version-controls the test items and the testware, and it records baselines. With those records, the team can always say which version of the scripts and the data was used in any past test cycle, and it can reproduce that situation when a defect returns.<\/p><p><strong>a) More test automation — the strongest distractor.<\/strong> This option is tempting because automated tests repeat the same steps every time. However, automated scripts without version control have exactly the same gap: nobody can say which version ran. The missing capability is configuration management, not automation.<\/p><p><strong>b) Stricter exit criteria — incorrect.<\/strong> Exit criteria govern when testing may stop. They record nothing about which versions were used.<\/p><p><strong>d) More detailed defect reports — incorrect.<\/strong> A defect report documents one anomaly. It cannot track the versions of the testware across releases.<\/p><p><strong>The key learning point:<\/strong> when a question turns on \"which version was used,\" the answer is configuration management — identification, version control, and baselines.<\/p>","reference":"Syllabus area 5.4, <em>Configuration Management<\/em>.","guide":{"href":"chapter-5.html#fl-5-4-1","title":"Configuration Management"}},{"n":38,"chapter":5,"stem":"<p>A tester drafts the following defect report:<\/p><ul><li>ID: DR-2107 — Title: \"Discount not applied for member orders over 500\"<\/li><li>Date: 2026-06-08 — Author: J. Demir<\/li><li>Test object: checkout service v2.3 — Environment: staging, build 5511<\/li><li>Steps: 1. log in as member — 2. add items totaling 520 — 3. apply coupon \"SAVE10\" — 4. open the payment page<\/li><li>Actual result: full price shown on the payment page<\/li><li>Severity: major — Priority: high<\/li><\/ul><p>Which essential element of a defect report is MISSING?<\/p>","options":[{"id":"a","html":"The expected result"},{"id":"b","html":"The severity of the defect"},{"id":"c","html":"The identification of the environment that produced the result"},{"id":"d","html":"The steps to reproduce the failure"}],"select":1,"key":["a"],"trap":"careless","lo":"FL-5.5.1","k":"K3","rationale":"<p><strong>Why a is correct.<\/strong> A defect report must contain both the expected result and the actual result. The report in the scenario gives the actual result — the full price was shown — but never states what should have happened. Without the expected result, the receiver cannot judge what correct behavior looks like.<\/p><p><strong>b) The severity — incorrect.<\/strong> The report states the severity explicitly: major. The option is there for readers who scan the options before checking the report.<\/p><p><strong>c) The test environment — incorrect.<\/strong> The environment is present: staging, build 5511.<\/p><p><strong>d) The steps to reproduce — incorrect.<\/strong> The report lists four numbered steps. They are present and reasonably precise.<\/p><p>The task is to compare the draft with the contents that a defect report needs. Each wrong option names an element that the draft already contains, so only a line-by-line check against the exhibit leads to the answer.<\/p><p><strong>The key learning point:<\/strong> in \"what is missing from this report\" questions, check every option against the exhibit line by line before answering.<\/p>","reference":"Syllabus area 5.5, <em>Defect Management<\/em>.","guide":{"href":"chapter-5.html#fl-5-5-1","title":"Preparing a professional defect report"}},{"n":39,"chapter":6,"stem":"<p>A team spread over three time zones uses a shared online whiteboard and chat channels to hold its refinement sessions, to discuss open questions about user stories, and to agree on acceptance criteria with the product owner. Which category of test tools supports this work?<\/p>","options":[{"id":"a","html":"Test management tools"},{"id":"b","html":"DevOps tools"},{"id":"c","html":"Collaboration tools"},{"id":"d","html":"Test design and test implementation tools"}],"select":1,"key":["c"],"trap":"near-miss","lo":"FL-6.1.1","k":"K2","rationale":"<p><strong>Why c is correct.<\/strong> Collaboration tools facilitate communication within the team. A shared whiteboard and chat channels that the team uses to discuss user stories and agree on acceptance criteria are tools of this kind.<\/p><p><strong>a) Test management tools — the strongest distractor.<\/strong> This option is tempting because test management tools also hold information that the whole team uses, such as test cases and defect reports. However, they manage tests, defects and traceability. The scenario is about people communicating and agreeing, which is what collaboration tools facilitate.<\/p><p><strong>b) DevOps tools — incorrect.<\/strong> DevOps tools support the delivery pipeline, workflow tracking, automated builds and CI/CD. The scenario involves no build or deployment.<\/p><p><strong>d) Test design and test implementation tools — incorrect.<\/strong> Test design and test implementation tools help to generate test cases, test data and test procedures. The team here is discussing and agreeing, not producing testware.<\/p><p><strong>The key learning point:<\/strong> name the tool category by the job it does. Communication between people points to collaboration tools, managing tests and defects to test management tools, and the delivery pipeline to DevOps tools.<\/p>","reference":"Syllabus area 6.1.1, <em>Tool Support for Testing<\/em>","guide":{"href":"chapter-6.html#fl-6-1-1","title":"Types of test tool and how they support testing"}},{"n":40,"chapter":6,"stem":"<p>A team lists four expectations for its first test automation tool. Which of these expectations describes a RISK of test automation rather than a benefit?<\/p>","options":[{"id":"a","html":"The tool runs the regression tests in the same order with the same data every night"},{"id":"b","html":"The tool provides coverage measures that are hard for testers to work out by hand"},{"id":"c","html":"The tool gives the testers more time to design new and deeper tests"},{"id":"d","html":"The tool will halve the test effort in its first month, without any training"}],"select":1,"key":["d"],"trap":"careless","lo":"FL-6.2.1","k":"K1","rationale":"<p><strong>Why d is correct.<\/strong> Unrealistic expectations about the benefits of a tool, including its functionality and ease of use, are a risk that the syllabus lists for test automation. Expecting the effort to halve within a month, with no training, ignores the effort that a new tool needs for its introduction, for training and for the maintenance of the scripts.<\/p><p><strong>a) The tool runs the regression tests in the same order with the same data every night — incorrect.<\/strong> Running the tests consistently and repeatably is a benefit. It prevents simple human errors.<\/p><p><strong>b) The tool provides coverage measures that are hard for testers to work out by hand — incorrect.<\/strong> More objective assessment, including measures that are too complicated for people to determine, is a benefit.<\/p><p><strong>c) The tool gives the testers more time to design new and deeper tests — incorrect.<\/strong> Freeing testers to design new and more effective tests is also a listed benefit.<\/p><p>This question turns on its direction word. Three options describe benefits, and only option d describes a risk, so decide what the question asks for before you weigh the options.<\/p><p><strong>The key learning point:<\/strong> in benefit-or-risk questions, settle the direction first and only then read the options.<\/p><hr />","reference":"Syllabus area 6.2.1, <em>Benefits and Risks of Test Automation<\/em>","guide":{"href":"chapter-6.html#fl-6-2-1","title":"The benefits and risks of test automation"}}],"mixed_order":[28,4,22,30,5,13,12,25,20,6,3,14,27,34,19,8,23,21,39,11,37,17,38,16,7,24,32,26,36,31,2,1,10,9,15,40,33,29,18,35],"bands":[{"min":35,"max":40,"label":"35–40","text":"This is a strong readiness signal for this mock exam. However, confirm it with at least one more timed exam before you book."},{"min":30,"max":34,"label":"30–34","text":"You are above the passing line on this attempt. Review every question you missed, and close those specific gaps before booking."},{"min":26,"max":29,"label":"26–29","text":"You are at passing level, but with no safety margin. Work through the explanations carefully, and take another timed exam before you decide."},{"min":0,"max":25,"label":"Below 26","text":"You are not ready yet, and that is useful information. Use the chapter scorecard below to find where the points were lost, and study those chapters first."}],"band_caution":"One caution about all of these bands: they assume a first, honest, timed attempt. A score from a review-mode pass, or from a second attempt at the same questions, measures familiarity rather than readiness.","scorecard_note":"A chapter where you scored half the available points or less is a study priority, regardless of your total.","resources":[{"title":"Method recaps for the applied techniques","html":"<p>Each recap turns the question-by-question explanations into a short, general procedure. Read the recap after you miss a question of its kind, and once more in the final week before the exam.<\/p><p><strong>Equivalence partitioning.<\/strong> List the valid partitions from the specified behavior — one partition per distinct behavior. Then add the invalid partitions, one for each rejected side or rejected category. Minimum coverage means one value per partition.<\/p><p><strong>Boundary value analysis.<\/strong> First read which variant the question states. The 2-value variant takes each boundary plus its closest neighbor in the adjacent partition. The 3-value variant takes each boundary value plus both of its neighbors, and this includes the boundary values of the invalid partitions. Count distinct values only.<\/p><p><strong>Decision table testing.<\/strong> Count the independent Boolean conditions, and compute 2 to that power for the full table. If the question marks combinations as infeasible, subtract them from the coverage target.<\/p><p><strong>State transition testing.<\/strong> Track the current state step by step, and check every event against the transitions defined from that state — never against the list of event names. For all-transitions coverage, the coverage items are the arrows of the model; for all-states coverage, the nodes.<\/p><p><strong>Estimation.<\/strong> For the ratio technique, write the ratio as a directed fraction before multiplying. For three-point estimation, use E = (a + 4m + b) / 6 — the most likely value counts four times.<\/p><p><strong>Test case prioritization.<\/strong> Apply the stated strategy first — risk, coverage, or requirement priority. Then walk the result once more and let every dependency pull its prerequisite forward. A secondary criterion is used to break ties.<\/p>"},{"title":"Quick terminology refresher","html":"<p>A short list of the term pairs that decide the most points in this exam. Each entry gives the distinction in one or two sentences.<\/p><p><strong>Error, defect, failure.<\/strong> An error is a human mistake. The error can produce a defect in a work product, and the defect may cause a failure when the software runs. Location is the test: people, work product, runtime. Environmental conditions, such as radiation or electromagnetic fields, can also cause failures.<\/p><p><strong>Confirmation testing and regression testing.<\/strong> Confirmation testing checks that an original defect has been fixed, for example by re-running the tests that failed because of it. Regression testing checks that a change, including a fix, has caused no adverse consequences. Such consequences can appear in the changed component, in other components, in connected systems or in the environment, and an impact analysis helps to decide how far the regression testing should reach.<\/p><p><strong>Entry criteria and exit criteria.<\/strong> Entry criteria control when an activity may start; exit criteria control when it may be declared finished. In agile work, they correspond to the Definition of Ready and the Definition of Done.<\/p><p><strong>Severity and priority.<\/strong> Severity describes how badly the system is affected. Priority describes how urgently the defect should be fixed. The two can point in opposite directions for the same defect.<\/p><p><strong>Baseline.<\/strong> A baseline is an approved version of a configuration item that can only be changed through formal change control. Returning to a previous baseline makes it possible to repeat earlier tests under the same conditions.<\/p><p><strong>Traceability.<\/strong> Traceability is the maintained link between the test basis and the testware. It answers questions such as \"Which tests cover this requirement?\" and makes coverage reportable in business terms.<\/p><p><strong>Whole team approach.<\/strong> Anyone in the team with the necessary skills may take any task, and everyone is responsible for quality. The approach may not suit contexts that demand a high level of test independence.<\/p><p><strong>Shift left.<\/strong> Testing activities move earlier in the lifecycle — reviews of early work products, static analysis from the first commits, test-first development. Early effort is invested to save later cost.<\/p><p><strong>Test pyramid and testing quadrants.<\/strong> The pyramid describes the shape of an automated test portfolio: many fast, isolated tests at the bottom, few slow, integrated tests at the top. The quadrants classify tests by two questions: business-facing or technology-facing, and supporting the team or critiquing the product.<\/p>"},{"title":"Exam-day checklist","html":"<p>A short, practical list for the day itself.<\/p><p><strong>Before the exam.<\/strong> Confirm your identification documents and your exam appointment details the evening before. If you are taking the exam remotely, test your camera, your microphone, and your internet connection in advance. Plan to arrive, or to be seated, fifteen minutes early.<\/p><p><strong>Time budget.<\/strong> You have 40 questions. Use the time guideline in About the Exam: about one minute for a K1 question, one to two minutes for a K2 question, and about three minutes for a K3 question. The budget is realistic but not generous. If a K3 question resists you, mark it, move on, and return to it at the end.<\/p><p><strong>Reading discipline.<\/strong> Read every question to the end before looking at the options. Watch for the direction words: NOT, MOST, BEST, FIRST. When a question contains data — a table, a diagram, a rule — read the data once carefully before reasoning about the options.<\/p><p><strong>Answer management.<\/strong> There is no penalty for a wrong answer, so never leave a question blank. If you must guess, first eliminate the options you can rule out, and then choose among the rest.<\/p><p><strong>The last pass.<\/strong> If time remains, review only the questions you marked. Change an answer only when you find a concrete reason for it in the question.<\/p>"}],"id":"practice-exam-1","guide_url":"https://kadir-camoglu.github.io/istqb-ctfl-v4-exam-guide/"}</script>
+<script>
+/* exam.js — CTFL practice exam runner (Exam mode + Study mode). Data: #exam-data (JSON). No external libraries. */
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("exam-data").textContent);
+  var Q = {}; D.questions.forEach(function (q) { Q[q.n] = q; });
+  var PASS = 26, TOTAL = D.questions.length;
+  var KEY = "ctfl-v4-" + D.id;
+  var TRAP_NAMES = { "source-gap": "Source gap", "near-miss": "Near-miss confusion", "procedure": "Procedure error", "careless": "Careless reading" };
+
+  // ---------- storage (never required; every access guarded) ----------
+  function load(k, def) { try { var v = localStorage.getItem(KEY + "-" + k); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+  function save(k, v) { try { localStorage.setItem(KEY + "-" + k, JSON.stringify(v)); } catch (e) { /* private mode: keep in memory */ } }
+  function drop(k) { try { localStorage.removeItem(KEY + "-" + k); } catch (e) {} }
+
+  // ---------- helpers ----------
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, html) { var e = document.createElement(tag); if (attrs) for (var a in attrs) { if (a === "class") e.className = attrs[a]; else e.setAttribute(a, attrs[a]); } if (html != null) e.innerHTML = html; return e; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function fmt(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+  function fmtLong(sec) { sec = Math.round(sec); var m = Math.floor(sec / 60), s = sec % 60; return m + " min " + s + " s"; }
+  function sameSet(a, b) { if (!a || !b || a.length !== b.length) return false; var x = a.slice().sort().join(), y = b.slice().sort().join(); return x === y; }
+  function show(id) { ["view-start", "view-run", "view-results"].forEach(function (v) { $(v).hidden = v !== id; }); window.scrollTo(0, 0); }
+
+  // ---------- theme ----------
+  (function () {
+    var t = load("theme", "auto");
+    function apply() { if (t === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t); $("theme-btn").textContent = "Theme: " + (t === "auto" ? "Auto" : t === "dark" ? "Dark" : "Light"); }
+    apply();
+    $("theme-btn").addEventListener("click", function () { t = t === "auto" ? "dark" : t === "dark" ? "light" : "auto"; save("theme", t); apply(); });
+  })();
+
+  // ---------- state ----------
+  var S = null, tickHandle = null, lastTick = 0, filter = "all", lastResult = null;
+
+  function newSession(mode) {
+    var order = document.querySelector('input[name="order"]:checked').value;
+    var time = mode === "exam" ? parseInt(document.querySelector('input[name="time"]:checked').value, 10) : 0;
+    return { mode: mode, orderType: order, order: order === "mixed" ? D.mixed_order.slice() : D.questions.map(function (q) { return q.n; }),
+             idx: 0, answers: {}, flags: {}, checked: {}, limit: time * 60, elapsed: 0, started: Date.now() };
+  }
+  function persist() { if (S) save("session", S); }
+
+  // ---------- start view ----------
+  function renderStart() {
+    var s = load("session", null);
+    var box = $("resume-box");
+    if (s && s.order) {
+      var answered = Object.keys(s.answers).filter(function (k) { return s.answers[k] && s.answers[k].length; }).length;
+      $("resume-title").textContent = s.mode === "exam" ? "You have an exam in progress." : "You have a study session in progress.";
+      $("resume-detail").textContent = "Question " + (s.idx + 1) + " of " + TOTAL + " · " + answered + " answered" +
+        (s.limit ? " · " + fmt(s.limit - s.elapsed) + " left on the timer" : "");
+      box.hidden = false;
+    } else box.hidden = true;
+    var h = load("history", []);
+    $("history-box").hidden = !h.length;
+    $("history-body").innerHTML = h.slice(-8).reverse().map(function (r) {
+      return "<tr><td>" + esc(new Date(r.date).toLocaleString()) + "</td><td>" + (r.mode === "exam" ? "Exam" + (r.limit ? " (" + r.limit / 60 + " min)" : " (untimed)") : "Study") +
+        "</td><td><strong>" + r.score + "</strong> / " + TOTAL + (r.mode === "exam" ? (r.score >= PASS ? " · pass line reached" : " · below pass line") : "") +
+        "</td><td>" + fmtLong(r.elapsed) + "</td></tr>";
+    }).join("");
+    show("view-start");
+  }
+
+  function renderResources() {
+    var box = $("resources");
+    D.resources.forEach(function (r) {
+      var d = el("details", { class: "box" }); d.appendChild(el("summary", null, esc(r.title)));
+      d.appendChild(el("div", { class: "inner" }, r.html)); box.appendChild(d);
+    });
+  }
+
+  // ---------- runner ----------
+  function cur() { return Q[S.order[S.idx]]; }
+  function isLocked(n) { return S.mode === "study" && S.checked[n]; }
+
+  function renderQuestion() {
+    var q = cur(), n = q.n, study = S.mode === "study", locked = isLocked(n);
+    $("run-pos").textContent = "Question " + (S.idx + 1) + " of " + TOTAL;
+    $("run-progress").style.width = ((S.idx + 1) / TOTAL * 100) + "%";
+    var meta = [];
+    if (study || S.orderType === "chapter") meta.push('<span class="tag">Chapter ' + q.chapter + " — " + esc(D.chapters[q.chapter]) + "</span>");
+    if (study) meta.push('<span class="tag">' + esc(q.k) + "</span>");
+    $("q-meta").innerHTML = meta.join("");
+    $("q-title").textContent = "Question " + (S.idx + 1);
+    $("q-stem").innerHTML = q.stem;
+    $("q-select").textContent = q.select === 2 ? "Select TWO options." : "Select ONE option.";
+    var box = $("q-opts"); box.innerHTML = '<legend class="sr-only">Options for question ' + n + "</legend>";
+    var chosen = S.answers[n] || [];
+    q.options.forEach(function (o, i) {
+      var type = q.select === 2 ? "checkbox" : "radio";
+      var lab = el("label", { class: "opt" + (q.select === 2 ? " multi" : "") });
+      var inp = el("input", { type: type, name: "opt", value: o.id });
+      if (chosen.indexOf(o.id) >= 0) { inp.checked = true; lab.classList.add("selected"); }
+      if (locked) { inp.disabled = true; lab.classList.add("locked"); }
+      lab.appendChild(inp);
+      lab.appendChild(el("span", { class: "letter", "aria-hidden": "true" }, o.id.toUpperCase()));
+      lab.appendChild(el("span", { class: "txt" }, '<span class="sr-only">Option ' + o.id + ": </span>" + o.html));
+      if (locked) {
+        var right = q.key.indexOf(o.id) >= 0, mine = chosen.indexOf(o.id) >= 0;
+        if (right) { lab.classList.add("correct"); lab.appendChild(el("span", { class: "mark" }, mine ? "✓ Your answer" : "✓ Correct")); }
+        else if (mine) { lab.classList.add("wrong"); lab.appendChild(el("span", { class: "mark" }, "✗ Your answer")); }
+        lab.classList.remove("selected");
+      }
+      inp.addEventListener("change", function () { choose(o.id, inp.checked); });
+      box.appendChild(lab);
+    });
+    // feedback (study)
+    var fb = $("q-feedback"); fb.innerHTML = "";
+    if (locked) fb.appendChild(explanation(q, chosen, true));
+    // buttons
+    $("prev-btn").disabled = S.idx === 0;
+    var last = S.idx === TOTAL - 1;
+    $("check-btn").hidden = !study || locked;
+    $("check-btn").disabled = chosen.length !== q.select;
+    $("next-btn").textContent = last ? (study ? "Finish session" : "Review and submit") : "Next →";
+    $("kbd-check").hidden = !study;
+    $("flag-btn").setAttribute("aria-pressed", S.flags[n] ? "true" : "false");
+    $("flag-btn").textContent = S.flags[n] ? "⚑ Flagged" : "⚑ Flag";
+    renderTally();
+    persist();
+  }
+
+  function explanation(q, chosen, withVerdict) {
+    var wrap = el("div");
+    if (withVerdict) {
+      var ok = sameSet(chosen, q.key);
+      wrap.appendChild(el("div", { class: "feedback " + (ok ? "ok" : "bad"), role: "status" },
+        ok ? "✓ Correct — the answer is " + q.key.join(" and ").toUpperCase() + "."
+           : (chosen.length ? "✗ Not quite. " : "Not answered. ") + "The correct answer is " + q.key.join(" and ").toUpperCase() + "."));
+    }
+    var r = el("div", { class: "rationale" });
+    r.innerHTML = '<p class="sans small muted" style="margin-top:.6rem">Trap: ' + esc(TRAP_NAMES[q.trap] || q.trap) + " · " + esc(q.lo) + " (" + esc(q.k) + ")</p>" + q.rationale;
+    var g = el("p", { class: "guide-link" });
+    var href = D.guide_url + q.guide.href;
+    g.innerHTML = "Review in the exam guide: <a href=\"" + esc(href) + "\" target=\"_blank\" rel=\"noopener\">" + esc(q.guide.title) + " →</a>" +
+      (q.reference ? '<br><span class="small muted">Syllabus reference: ' + q.reference + "</span>" : "");
+    r.appendChild(g);
+    wrap.appendChild(r);
+    return wrap;
+  }
+
+  function choose(id, on) {
+    var q = cur(), n = q.n; if (isLocked(n)) return;
+    var a = (S.answers[n] || []).slice();
+    if (q.select === 1) a = on ? [id] : [];
+    else { var i = a.indexOf(id); if (on && i < 0) { if (a.length >= q.select) a.shift(); a.push(id); } if (!on && i >= 0) a.splice(i, 1); }
+    S.answers[n] = a;
+    renderQuestion();
+  }
+
+  function renderTally() {
+    if (S.mode !== "study") { $("run-tally").hidden = true; return; }
+    var ok = 0, bad = 0;
+    Object.keys(S.checked).forEach(function (n) { if (sameSet(S.answers[n], Q[n].key)) ok++; else bad++; });
+    $("run-tally").hidden = false;
+    $("run-tally").innerHTML = '<b class="ok">' + ok + "</b> correct · <b class=\"bad\">" + bad + "</b> missed";
+  }
+
+  function go(i) { if (i < 0 || i >= TOTAL) return; S.idx = i; renderQuestion(); closeNav(); window.scrollTo(0, 0); var t = $("q-title"); t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); }
+  function check() { var q = cur(); if ((S.answers[q.n] || []).length !== q.select) return; S.checked[q.n] = true; renderQuestion(); }
+  function toggleFlag() { var n = cur().n; if (S.flags[n]) delete S.flags[n]; else S.flags[n] = true; renderQuestion(); if (!$("nav-drawer").hidden) renderNav(); }
+
+  // ---------- timer ----------
+  function startTick() {
+    stopTick(); lastTick = Date.now();
+    tickHandle = setInterval(function () {
+      var now = Date.now(); S.elapsed += (now - lastTick) / 1000; lastTick = now;
+      renderTimer();
+      if (S.limit && S.elapsed >= S.limit) { stopTick(); finish(true); }
+      else if (Math.floor(S.elapsed) % 5 === 0) persist();
+    }, 1000);
+    renderTimer();
+  }
+  function stopTick() { if (tickHandle) clearInterval(tickHandle); tickHandle = null; }
+  var warned = false;
+  function renderTimer() {
+    var t = $("run-timer");
+    if (S.mode !== "exam") { t.hidden = true; return; }
+    t.hidden = false;
+    if (!S.limit) { t.textContent = fmt(S.elapsed); t.title = "Time used (no limit)"; t.className = "timer"; return; }
+    var left = S.limit - S.elapsed;
+    t.textContent = fmt(left); t.title = "Time left";
+    t.className = "timer" + (left <= 60 ? " crit" : left <= 300 ? " low" : "");
+    if (left <= 300 && !warned) { warned = true; $("run-pos").textContent += " · 5 minutes left"; }
+  }
+
+  // ---------- navigator ----------
+  function renderNav() {
+    var grid = $("nav-grid"); grid.innerHTML = "";
+    var answered = 0, flagged = 0;
+    S.order.forEach(function (n, i) {
+      var a = S.answers[n] || [], q = Q[n];
+      var c = el("button", { class: "nav-cell", type: "button" }, String(i + 1));
+      var lab = "Question " + (i + 1);
+      if (a.length === q.select) { answered++; }
+      if (S.mode === "study" && S.checked[n]) { var ok = sameSet(a, q.key); c.classList.add(ok ? "correct" : "wrong"); lab += ok ? ", correct" : ", missed"; }
+      else if (a.length === q.select) { c.classList.add("answered"); lab += ", answered"; }
+      if (S.flags[n]) { c.classList.add("flagged"); flagged++; lab += ", flagged"; }
+      if (i === S.idx) { c.classList.add("current"); c.setAttribute("aria-current", "true"); }
+      c.setAttribute("aria-label", lab);
+      c.addEventListener("click", function () { go(i); });
+      grid.appendChild(c);
+    });
+    if (S.mode === "exam") {
+      $("nav-counts").innerHTML = "<strong>" + answered + "</strong> answered · <strong>" + (TOTAL - answered) + "</strong> unanswered · <strong>" + flagged + "</strong> flagged";
+      $("nav-legend").innerHTML = '<span><i class="a"></i>Answered</span><span><i></i>Unanswered</span><span><i class="f"></i>Flagged</span>';
+      $("nav-submit").textContent = "Submit exam";
+    } else {
+      var checked = Object.keys(S.checked).length;
+      $("nav-counts").innerHTML = "<strong>" + checked + "</strong> of " + TOTAL + " checked";
+      $("nav-legend").innerHTML = '<span><i class="c"></i>Correct</span><span><i class="w"></i>Missed</span><span><i class="a"></i>Answered, not checked</span><span><i class="f"></i>Flagged</span>';
+      $("nav-submit").textContent = "Finish session";
+    }
+  }
+  var lastFocus = null;
+  function openNav() { lastFocus = document.activeElement; renderNav(); $("nav-back").hidden = false; $("nav-drawer").hidden = false; var c = document.querySelector(".nav-cell.current"); (c || $("nav-drawer").querySelector("button")).focus(); }
+  function closeNav() { $("nav-back").hidden = true; $("nav-drawer").hidden = true; if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus({ preventScroll: true }); }
+
+  // ---------- modal ----------
+  function modal(title, bodyHtml, actions) {
+    $("modal-h").textContent = title; $("modal-b").innerHTML = bodyHtml;
+    var box = $("modal-actions"); box.innerHTML = "";
+    actions.forEach(function (a) { var b = el("button", { class: "btn " + (a.cls || ""), type: "button" }, a.label); b.addEventListener("click", function () { closeModal(); if (a.fn) a.fn(); }); box.appendChild(b); });
+    $("modal").hidden = false; box.lastChild.focus();
+  }
+  function closeModal() { $("modal").hidden = true; }
+
+  function askSubmit() {
+    var un = S.order.filter(function (n) { return (S.answers[n] || []).length !== Q[n].select; }).length;
+    var fl = Object.keys(S.flags).length;
+    if (S.mode === "study") {
+      var left = TOTAL - Object.keys(S.checked).length;
+      modal("Finish this study session?", "<p>" + (left ? left + " question" + (left > 1 ? "s have" : " has") + " not been checked yet. They will count as not answered in the summary." : "You have checked every question.") + "</p>",
+        [{ label: "Keep studying" }, { label: "Finish", cls: "primary", fn: function () { finish(false); } }]);
+      return;
+    }
+    var body = "<p>Once you submit, you cannot change your answers.</p>";
+    if (un) body += "<p><strong>" + un + " unanswered.</strong> There is no penalty for a wrong answer, so a guess cannot cost you points.</p>";
+    if (fl) body += "<p>" + fl + " flagged for review.</p>";
+    modal("Submit your exam?", body, [{ label: "Go back" }, { label: "Submit", cls: "primary", fn: function () { finish(false); } }]);
+  }
+
+  // ---------- start / resume / quit ----------
+  function begin(mode) {
+    var existing = load("session", null);
+    function go2() { S = newSession(mode); warned = false; enterRun(); }
+    if (existing && existing.order) modal("Start a new attempt?", "<p>Your attempt in progress will be discarded.</p>", [{ label: "Cancel" }, { label: "Start new", cls: "primary", fn: go2 }]);
+    else go2();
+  }
+  function enterRun() {
+    show("view-run"); renderQuestion();
+    var t = $("q-title"); t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true });
+    if (S.mode === "exam") startTick(); else { stopTick(); $("run-timer").hidden = true; }
+  }
+  function quit() { persist(); stopTick(); closeNav(); renderStart(); }
+
+  // ---------- results ----------
+  function score(st) {
+    var res = { total: 0, ch: {}, k: {}, trapMiss: {}, items: [] };
+    D.questions.forEach(function (q) {
+      var a = st.answers[q.n] || [];
+      var counted = st.mode === "study" ? !!st.checked[q.n] : true;
+      var answered = counted && a.length === q.select;
+      var ok = answered && sameSet(a, q.key);
+      res.ch[q.chapter] = res.ch[q.chapter] || { ok: 0, n: 0 }; res.ch[q.chapter].n++; if (ok) res.ch[q.chapter].ok++;
+      res.k[q.k] = res.k[q.k] || { ok: 0, n: 0 }; res.k[q.k].n++; if (ok) res.k[q.k].ok++;
+      if (!ok) res.trapMiss[q.trap] = (res.trapMiss[q.trap] || 0) + 1;
+      if (ok) res.total++;
+      res.items.push({ n: q.n, a: answered ? a : [], status: ok ? "ok" : answered ? "bad" : "skip", flag: !!st.flags[q.n] });
+    });
+    return res;
+  }
+
+  function finish(timeUp) {
+    stopTick(); closeNav();
+    var r = score(S);
+    lastResult = { st: S, r: r, date: Date.now() };
+    var h = load("history", []); h.push({ date: Date.now(), mode: S.mode, limit: S.limit, score: r.total, elapsed: S.elapsed }); save("history", h.slice(-30));
+    save("last", { st: S, date: lastResult.date });
+    drop("session"); S = null;
+    renderResults(timeUp);
+  }
+
+  function renderResults(timeUp) {
+    var st = lastResult.st, r = lastResult.r, exam = st.mode === "exam";
+    $("res-title").textContent = exam ? "Your exam result" : "Your study session summary";
+    var hero = $("res-hero"); hero.className = "hero " + (exam ? (r.total >= PASS ? "pass" : "fail") : "study");
+    $("res-ring").style.setProperty("--p", (r.total / TOTAL * 100).toFixed(1));
+    $("res-score").textContent = r.total;
+    $("res-verdict").textContent = exam ? (r.total >= PASS ? "At or above the pass line" : "Below the pass line") : "Study mode — practice score";
+    $("res-line").textContent = Math.round(r.total / TOTAL * 100) + "% · the pass line in the real exam is " + PASS + " of " + TOTAL + " (65%).";
+    $("res-time").textContent = (timeUp ? "Time ran out. Unanswered questions were scored as wrong. " : "") +
+      (exam ? "Time used: " + fmtLong(st.elapsed) + (st.limit ? " of " + st.limit / 60 + " min." : " (no limit).") : "");
+    var band = D.bands.filter(function (b) { return r.total >= b.min && r.total <= b.max; })[0];
+    $("res-band").textContent = exam && band ? band.text : "This score comes from study mode, where you saw each explanation as you went. It shows what you practised, not how ready you are. For a readiness check, take the exam in exam mode, timed, before you look at the answers.";
+    $("res-caution").textContent = exam ? D.band_caution : "";
+    $("res-caution").hidden = !exam;
+    // chapters
+    $("res-chapters").innerHTML = Object.keys(D.chapters).map(function (c) {
+      var x = r.ch[c], pct = x.ok / x.n * 100, low = x.ok <= x.n / 2;
+      return "<tr><td>" + c + " — " + esc(D.chapters[c]) + (low ? ' <span class="prio">Study priority</span>' : "") + "</td><td><strong>" + x.ok + "</strong> / " + x.n +
+        '</td><td class="bar"><div class="bar-track" role="img" aria-label="' + Math.round(pct) + ' percent"><div class="bar-fill' + (low ? " low" : "") + '" style="width:' + pct + '%"></div></div></td></tr>';
+    }).join("");
+    $("res-scorenote").textContent = D.scorecard_note;
+    $("res-k").innerHTML = ["K1", "K2", "K3"].map(function (k) { var x = r.k[k] || { ok: 0, n: 0 }; return "<tr><td>" + k + "</td><td><strong>" + x.ok + "</strong> / " + x.n + "</td></tr>"; }).join("");
+    $("res-trap").innerHTML = Object.keys(TRAP_NAMES).map(function (t) { var m = r.trapMiss[t] || 0; return "<tr><td>" + TRAP_NAMES[t] + "</td><td>" + (m >= 3 ? "<strong>" + m + "</strong>" : m) + "</td></tr>"; }).join("");
+    filter = "all"; setChips(); renderList();
+    show("view-results");
+  }
+
+  function setChips() { document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c.getAttribute("data-filter") === filter ? "true" : "false"); }); }
+
+  function optionsReview(q, mine) {
+    return '<ol class="sr-only"></ol>' + q.options.map(function (o) {
+      var right = q.key.indexOf(o.id) >= 0, me = mine.indexOf(o.id) >= 0;
+      var cls = "opt locked" + (q.select === 2 ? " multi" : "") + (right ? " correct" : me ? " wrong" : "");
+      var mark = right ? (me ? "✓ Your answer" : "✓ Correct") : me ? "✗ Your answer" : "";
+      return '<div class="' + cls + '"><span class="letter" aria-hidden="true">' + o.id.toUpperCase() + '</span><span class="txt"><span class="sr-only">Option ' + o.id + ": </span>" + o.html + "</span>" + (mark ? '<span class="mark">' + mark + "</span>" : "") + "</div>";
+    }).join("");
+  }
+
+  function renderList() {
+    var st = lastResult.st, r = lastResult.r, list = $("res-list"); list.innerHTML = "";
+    var shown = 0;
+    var order = st.order;
+    order.forEach(function (n, i) {
+      var it = r.items.filter(function (x) { return x.n === n; })[0], q = Q[n];
+      if (filter === "flag" ? !it.flag : (filter !== "all" && it.status !== filter)) return;
+      shown++;
+      var d = el("details", { class: "rev-item " + it.status });
+      var badge = it.status === "ok" ? "✓" : it.status === "bad" ? "✗" : "–";
+      var stemText = q.stem.replace(/<table[\s\S]*?<\/table>/g, " [table] ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      if (stemText.length > 110) stemText = stemText.slice(0, 107) + "…";
+      d.innerHTML = '<summary><span class="badge" aria-label="' + (it.status === "ok" ? "Correct" : it.status === "bad" ? "Incorrect" : "Not answered") + '">' + badge + "</span>" +
+        '<span class="sumtxt"><strong>Question ' + (i + 1) + "</strong>" + (st.orderType === "mixed" ? ' <span class="lo">(no. ' + n + " in the printed order)</span>" : "") + (it.flag ? " ⚑" : "") + "<br>" + esc(stemText) +
+        '<br><span class="lo">Chapter ' + q.chapter + " · " + esc(q.lo) + " (" + esc(q.k) + ") · " + esc(TRAP_NAMES[q.trap] || q.trap) + "</span></span>" +
+        '<span class="ans">You: <b>' + (it.a.length ? it.a.join(", ").toUpperCase() : "—") + "</b> · Key: <b>" + q.key.join(", ").toUpperCase() + "</b></span></summary>";
+      var c = el("div", { class: "content" });
+      c.innerHTML = '<div class="stem">' + q.stem + '</div><p class="select-note">' + (q.select === 2 ? "Select TWO options." : "Select ONE option.") + '</p><div class="opts" style="display:grid;gap:8px">' + optionsReview(q, it.a) + "</div>";
+      c.appendChild(explanation(q, it.a, false));
+      d.appendChild(c);
+      list.appendChild(d);
+    });
+    $("res-empty").hidden = shown > 0;
+  }
+
+  function csv() {
+    var st = lastResult.st, r = lastResult.r;
+    var rows = [["Question", "Chapter", "Learning objective", "K-level", "Trap type", "My answer", "Key", "Result", "Flagged", "Review in the guide", "Why I missed it", "My action"]];
+    r.items.forEach(function (it) {
+      var q = Q[it.n];
+      if (it.status === "ok" && !it.flag) return;
+      rows.push([q.n, q.chapter, q.lo, q.k, TRAP_NAMES[q.trap] || q.trap, it.a.join(" ").toUpperCase(), q.key.join(" ").toUpperCase(),
+                 it.status === "ok" ? "correct" : it.status === "bad" ? "incorrect" : "not answered", it.flag ? "yes" : "", D.guide_url + q.guide.href, "", ""]);
+    });
+    var text = rows.map(function (r) { return r.map(function (c) { c = String(c); return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(","); }).join("\r\n");
+    var blob = new Blob(["﻿" + text], { type: "text/csv;charset=utf-8" });
+    var a = el("a", { href: URL.createObjectURL(blob), download: D.id + "-mistake-log.csv" });
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+
+  // ---------- print ----------
+  function printOut(kind) {
+    var p = $("print-area"), h = "<h1>" + esc(D.title) + "</h1>";
+    if (kind === "blank" || kind === "key") {
+      if (kind === "blank") {
+        h += "<p>40 questions · 60 minutes (75 with extended time) · pass mark 26. Answers are not included.</p>";
+        var ch = 0;
+        D.questions.forEach(function (q) {
+          if (q.chapter !== ch) { ch = q.chapter; h += "<h2>Chapter " + ch + " — " + esc(D.chapters[ch]) + "</h2>"; }
+          h += '<div class="pq"><strong>Question ' + q.n + '</strong><div class="stem">' + q.stem + "</div><ol>" +
+            q.options.map(function (o) { return "<li>" + o.id + ") " + o.html + "</li>"; }).join("") + "</ol><em>" + (q.select === 2 ? "Select TWO options." : "Select ONE option.") + "</em></div>";
+        });
+      } else {
+        h += "<h2>Answer key</h2><p>" + D.questions.map(function (q) { return q.n + " " + q.key.join(",").toUpperCase(); }).join(" · ") + "</p><h2>Explanations</h2>";
+        D.questions.forEach(function (q) { h += '<div class="prat"><h3>Question ' + q.n + " — correct answer: " + q.key.join(", ").toUpperCase() + "</h3><p><em>Trap: " + esc(TRAP_NAMES[q.trap] || q.trap) + " · " + q.lo + " (" + q.k + ")</em></p>" + q.rationale + "<p><em>Review in the exam guide: " + esc(q.guide.title) + " — " + esc(D.guide_url + q.guide.href) + "</em></p></div>"; });
+      }
+    } else {
+      var r = lastResult.r;
+      h += "<p>" + (lastResult.st.mode === "exam" ? "Exam mode" : "Study mode") + " · score " + r.total + " / " + TOTAL + " · " + new Date(lastResult.date).toLocaleString() + "</p>";
+      r.items.forEach(function (it) { var q = Q[it.n]; h += '<div class="prat"><h3>Question ' + q.n + " — " + (it.status === "ok" ? "correct" : it.status === "bad" ? "incorrect" : "not answered") + " · your answer " + (it.a.join(", ").toUpperCase() || "—") + " · key " + q.key.join(", ").toUpperCase() + '</h3><div class="stem">' + q.stem + "</div><ol>" + q.options.map(function (o) { return "<li>" + o.id + ") " + o.html + "</li>"; }).join("") + "</ol>" + q.rationale + "</div>"; });
+    }
+    p.innerHTML = h;
+    window.print();
+  }
+
+  // ---------- events ----------
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-act]"); if (!t) {
+      var f = e.target.closest("[data-filter]"); if (f) { filter = f.getAttribute("data-filter"); setChips(); renderList(); }
+      if (e.target === $("nav-back")) closeNav();
+      return;
+    }
+    var act = t.getAttribute("data-act");
+    if (act === "home") { e.preventDefault(); if (S) quit(); else renderStart(); }
+    else if (act === "start-exam") begin("exam");
+    else if (act === "start-study") begin("study");
+    else if (act === "resume") { S = load("session", null); if (S) { warned = false; enterRun(); } }
+    else if (act === "discard") modal("Discard this attempt?", "<p>Your answers in progress will be deleted from this browser.</p>", [{ label: "Cancel" }, { label: "Discard", cls: "primary", fn: function () { drop("session"); renderStart(); } }]);
+    else if (act === "clear-history") modal("Clear your history?", "<p>All saved scores in this browser will be deleted.</p>", [{ label: "Cancel" }, { label: "Clear", cls: "primary", fn: function () { drop("history"); drop("last"); renderStart(); } }]);
+    else if (act === "prev") go(S.idx - 1);
+    else if (act === "next") { if (S.idx === TOTAL - 1) { if (S.mode === "exam") openNav(); else askSubmit(); } else go(S.idx + 1); }
+    else if (act === "check") check();
+    else if (act === "open-nav") openNav();
+    else if (act === "close-nav") closeNav();
+    else if (act === "submit") askSubmit();
+    else if (act === "quit") quit();
+    else if (act === "csv") csv();
+    else if (act === "print-blank") printOut("blank");
+    else if (act === "print-key") printOut("key");
+    else if (act === "print-results") printOut("results");
+  });
+  $("flag-btn").addEventListener("click", toggleFlag);
+  document.addEventListener("keydown", function (e) {
+    if (!$("modal").hidden) { if (e.key === "Escape") closeModal(); return; }
+    if (!$("nav-drawer").hidden) { if (e.key === "Escape") closeNav(); return; }
+    if ($("view-run").hidden || !S || e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key.toLowerCase(), q = cur();
+    var idx = "abcde".indexOf(k); if (idx < 0 && /^[1-5]$/.test(k)) idx = parseInt(k, 10) - 1;
+    if (idx >= 0 && idx < q.options.length) { var id = q.options[idx].id, on = (S.answers[q.n] || []).indexOf(id) < 0 || q.select === 1; choose(id, on); e.preventDefault(); }
+    else if (e.key === "ArrowRight") { if (S.idx < TOTAL - 1) go(S.idx + 1); }
+    else if (e.key === "ArrowLeft") go(S.idx - 1);
+    else if (k === "f") toggleFlag();
+    else if (e.key === "Enter" && S.mode === "study" && e.target.tagName !== "BUTTON" && e.target.tagName !== "A") { if (isLocked(q.n)) { if (S.idx < TOTAL - 1) go(S.idx + 1); } else check(); }
+  });
+  window.addEventListener("beforeunload", function () { if (S) persist(); });
+  document.addEventListener("visibilitychange", function () { if (S && document.hidden) persist(); });
+
+  // ---------- boot ----------
+  function topH() { var t = document.querySelector(".topbar"); document.documentElement.style.setProperty("--topbar-h", t.offsetHeight + "px"); }
+  topH(); window.addEventListener("resize", topH);
+  renderResources();
+  var last = load("last", null);
+  if (last && last.st) { lastResult = { st: last.st, r: score(last.st), date: last.date }; }
+  (function addLastBtn() {
+    if (!lastResult) return;
+    var b = el("button", { class: "btn small", type: "button" }, "View last result");
+    b.addEventListener("click", function () { renderResults(false); });
+    $("history-box").appendChild(b);
+  })();
+  renderStart();
+})();
+
+</script>
+</body>
+</html>
